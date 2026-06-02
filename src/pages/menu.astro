@@ -1,0 +1,119 @@
+---
+import Base from "@layouts/Base.astro";
+import Icon from "@components/Icon.astro";
+import ProductCard from "@components/ProductCard.astro";
+import { menu, categoryLabels, type Category } from "@data/menu";
+
+const order: Category[] = ["breads", "sweets", "pantry"];
+const grouped = order
+  .map((cat) => ({ cat, items: menu.filter((m) => m.category === cat) }))
+  .filter((g) => g.items.length > 0);
+---
+<Base
+  title="Menu"
+  description="Freshly baked Ethiopian breads, sweets, and ceremony-grade coffee — order ahead for pickup or local delivery in St. Paul."
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow" data-reveal>The menu</p>
+      <h1 data-reveal data-reveal-delay="60">Everything, baked the morning it's yours.</h1>
+      <p class="lede prose" data-reveal data-reveal-delay="120">
+        Order ahead and we'll have it warm and waiting. Add what you love to your
+        basket — pickup and delivery are sorted at checkout.
+      </p>
+      <nav class="menu-jump" aria-label="Menu sections" data-reveal data-reveal-delay="180">
+        {grouped.map((g) => <a href={`#${g.cat}`}>{categoryLabels[g.cat]}</a>)}
+        <a href="/subscriptions">Bread Boxes</a>
+      </nav>
+    </div>
+  </section>
+
+  {
+    grouped.map((g) => (
+      <section class="section menu-section" id={g.cat}>
+        <div class="container">
+          <div class="divider-leaf" data-reveal>
+            <Icon name="wheat" size={22} />
+            <h2>{categoryLabels[g.cat]}</h2>
+            <Icon name="wheat" size={22} />
+          </div>
+          <div class="grid cols-3">
+            {g.items.map((item, i) => <ProductCard item={item} delay={(i % 3) * 70} />)}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
+  <section class="section">
+    <div class="container menu-sub-cta" data-reveal>
+      <div>
+        <h2>Never run out of good bread.</h2>
+        <p class="lede">Let a fresh box arrive on a schedule — and feed a neighbor while you're at it.</p>
+      </div>
+      <a href="/subscriptions" class="btn btn--gold btn--lg">See the bread boxes <Icon name="arrow" size={18} /></a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-hero {
+    padding-block: clamp(2.5rem, 7vw, 4.5rem) clamp(1rem, 3vw, 2rem);
+    text-align: center;
+  }
+  .page-hero .lede {
+    margin-inline: auto;
+    margin-top: 1rem;
+  }
+  .menu-jump {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+  .menu-jump a {
+    padding: 0.5em 1.1em;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid color-mix(in oklab, var(--ink) 12%, transparent);
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-weight: 600;
+    font-size: var(--step--1);
+    transition: all 0.2s var(--ease);
+  }
+  .menu-jump a:hover {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+  .menu-section {
+    padding-block: clamp(2rem, 5vw, 3.2rem);
+    scroll-margin-top: 6rem;
+  }
+  .divider-leaf {
+    margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  .divider-leaf h2 {
+    white-space: nowrap;
+  }
+  .divider-leaf :global(svg) {
+    flex-shrink: 0;
+  }
+  .menu-sub-cta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding: clamp(2rem, 5vw, 3rem);
+    border-radius: var(--radius-lg);
+    background: linear-gradient(
+      120deg,
+      color-mix(in oklab, var(--green) 12%, var(--surface)),
+      var(--surface)
+    );
+    border: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+  }
+</style>

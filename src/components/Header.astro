@@ -1,0 +1,246 @@
+---
+import { site } from "@data/site";
+import Icon from "@components/Icon.astro";
+
+const nav = [
+  { href: "/menu", label: "Menu" },
+  { href: "/subscriptions", label: "Bread Boxes" },
+  { href: "/our-story", label: "Our Story" },
+  { href: "/visit", label: "Visit" },
+];
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a href="/" class="brand" aria-label={`${site.name} — home`}>
+      <span class="brand__mark" aria-hidden="true">
+        <!-- stylized injera-round mark -->
+        <svg viewBox="0 0 40 40" width="38" height="38">
+          <circle cx="20" cy="20" r="18" fill="var(--gold)"></circle>
+          <circle cx="20" cy="20" r="18" fill="none" stroke="var(--berbere)" stroke-width="2"></circle>
+          <g stroke="var(--coffee)" stroke-width="1.6" stroke-linecap="round">
+            <path d="M20 7v26M7 20h26M11 11l18 18M29 11 11 29"></path>
+          </g>
+          <circle cx="20" cy="20" r="3.4" fill="var(--green)"></circle>
+        </svg>
+      </span>
+      <span class="brand__name">{site.name}</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <ul>
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={path === item.href ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <a href="/menu" class="btn btn--primary header-order">Order</a>
+      <button
+        type="button"
+        class="icon-btn cart-toggle"
+        data-cart-open
+        aria-label="Open your basket"
+      >
+        <Icon name="cart" size={22} />
+        <span class="cart-count" data-cart-count hidden>0</span>
+      </button>
+      <button
+        type="button"
+        class="icon-btn nav-toggle"
+        data-nav-toggle
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Open menu"
+      >
+        <Icon name="menu" size={24} />
+      </button>
+    </div>
+  </div>
+
+  <!-- mobile nav -->
+  <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+    <nav aria-label="Primary mobile">
+      <ul>
+        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        <li><a href="/menu" class="btn btn--primary btn--block">Order now</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: color-mix(in oklab, var(--parchment) 86%, transparent);
+    backdrop-filter: saturate(1.3) blur(12px);
+    -webkit-backdrop-filter: saturate(1.3) blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s var(--ease), background-color 0.3s var(--ease),
+      box-shadow 0.3s var(--ease);
+  }
+  .site-header[data-scrolled] {
+    border-color: color-mix(in oklab, var(--ink) 10%, transparent);
+    box-shadow: var(--shadow-sm);
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    min-height: 4.6rem;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    text-decoration: none;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.3rem;
+    letter-spacing: -0.01em;
+  }
+  .brand__mark {
+    display: grid;
+    place-items: center;
+    transition: transform 0.5s var(--ease);
+  }
+  .brand:hover .brand__mark {
+    transform: rotate(45deg);
+  }
+  .site-nav {
+    margin-inline-start: auto;
+  }
+  .site-nav ul {
+    display: flex;
+    gap: clamp(1rem, 2vw, 2rem);
+    list-style: none;
+    padding: 0;
+  }
+  .site-nav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-weight: 550;
+    padding: 0.3em 0;
+    position: relative;
+  }
+  .site-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    background: var(--berbere);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s var(--ease);
+  }
+  .site-nav a:hover,
+  .site-nav a[aria-current="page"] {
+    color: var(--ink);
+  }
+  .site-nav a:hover::after,
+  .site-nav a[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .icon-btn {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    color: var(--ink);
+    transition: background-color 0.2s var(--ease), transform 0.2s var(--ease);
+  }
+  .icon-btn:hover {
+    background: color-mix(in oklab, var(--ink) 8%, transparent);
+  }
+  .icon-btn:active {
+    transform: scale(0.92);
+  }
+  .cart-count {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.2rem;
+    min-width: 1.2rem;
+    height: 1.2rem;
+    padding: 0 0.3rem;
+    border-radius: 999px;
+    background: var(--berbere);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    line-height: 1;
+  }
+  .nav-toggle {
+    display: none;
+  }
+  .mobile-nav {
+    display: none;
+    border-top: 1px solid color-mix(in oklab, var(--ink) 10%, transparent);
+    padding: 1rem clamp(1.1rem, 5vw, 2.5rem) 1.5rem;
+    background: var(--parchment);
+  }
+  .mobile-nav ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.4rem;
+  }
+  .mobile-nav a:not(.btn) {
+    display: block;
+    padding: 0.7em 0.2em;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: var(--step-1);
+    font-family: var(--font-display);
+    border-bottom: 1px solid color-mix(in oklab, var(--ink) 7%, transparent);
+  }
+
+  @media (max-width: 820px) {
+    .site-nav,
+    .header-order {
+      display: none;
+    }
+    .nav-toggle {
+      display: grid;
+    }
+    .site-nav {
+      margin-inline-start: 0;
+    }
+    .site-header__actions {
+      margin-inline-start: auto;
+    }
+    .site-header[data-nav-open] .mobile-nav {
+      display: block;
+      animation: sheet 0.3s var(--ease);
+    }
+  }
+  @keyframes sheet {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+  }
+</style>

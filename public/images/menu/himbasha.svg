@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480" role="img">
+  <defs>
+    <radialGradient id="g101" cx="32%" cy="26%" r="85%">
+      <stop offset="0%" stop-color="#fffdf8"/>
+      <stop offset="55%" stop-color="#d99a2b" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#b4392b" stop-opacity="0.42"/>
+    </radialGradient>
+    <linearGradient id="g101p" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fffdf8"/>
+      <stop offset="100%" stop-color="#f1e7d2"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="480" fill="#faf4e8"/>
+  <rect width="640" height="480" fill="url(#g101)"/>
+  <circle cx="87" cy="367" r="1.6" fill="#4a2e20" opacity="0.06"/><circle cx="246" cy="333" r="1.7" fill="#4a2e20" opacity="0.08"/><circle cx="146" cy="37" r="1.3" fill="#4a2e20" opacity="0.07"/><circle cx="250" cy="420" r="1.5" fill="#4a2e20" opacity="0.03"/><circle cx="39" cy="201" r="0.6" fill="#4a2e20" opacity="0.03"/><circle cx="487" cy="130" r="0.6" fill="#4a2e20" opacity="0.06"/><circle cx="27" cy="283" r="0.6" fill="#4a2e20" opacity="0.05"/><circle cx="550" cy="209" r="2.0" fill="#4a2e20" opacity="0.08"/><circle cx="402" cy="33" r="0.8" fill="#4a2e20" opacity="0.03"/><circle cx="330" cy="0" r="1.8" fill="#4a2e20" opacity="0.03"/><circle cx="111" cy="20" r="2.4" fill="#4a2e20" opacity="0.05"/><circle cx="94" cy="370" r="1.2" fill="#4a2e20" opacity="0.07"/><circle cx="138" cy="228" r="2.4" fill="#4a2e20" opacity="0.03"/><circle cx="178" cy="290" r="2.4" fill="#4a2e20" opacity="0.05"/><circle cx="235" cy="366" r="0.7" fill="#4a2e20" opacity="0.07"/><circle cx="401" cy="276" r="1.4" fill="#4a2e20" opacity="0.07"/><circle cx="235" cy="105" r="0.8" fill="#4a2e20" opacity="0.04"/><circle cx="413" cy="309" r="0.7" fill="#4a2e20" opacity="0.03"/><circle cx="496" cy="60" r="2.0" fill="#4a2e20" opacity="0.06"/><circle cx="380" cy="120" r="1.7" fill="#4a2e20" opacity="0.06"/><circle cx="446" cy="400" r="0.9" fill="#4a2e20" opacity="0.07"/><circle cx="533" cy="302" r="1.7" fill="#4a2e20" opacity="0.05"/><circle cx="125" cy="168" r="1.5" fill="#4a2e20" opacity="0.03"/><circle cx="349" cy="461" r="2.1" fill="#4a2e20" opacity="0.05"/><circle cx="101" cy="82" r="1.8" fill="#4a2e20" opacity="0.08"/><circle cx="49" cy="184" r="1.8" fill="#4a2e20" opacity="0.05"/><circle cx="69" cy="412" r="0.7" fill="#4a2e20" opacity="0.07"/><circle cx="383" cy="392" r="1.4" fill="#4a2e20" opacity="0.04"/><circle cx="340" cy="143" r="1.5" fill="#4a2e20" opacity="0.03"/><circle cx="276" cy="343" r="1.4" fill="#4a2e20" opacity="0.06"/><circle cx="348" cy="239" r="1.1" fill="#4a2e20" opacity="0.04"/><circle cx="297" cy="25" r="0.9" fill="#4a2e20" opacity="0.07"/><circle cx="576" cy="410" r="2.0" fill="#4a2e20" opacity="0.03"/><circle cx="197" cy="127" r="1.1" fill="#4a2e20" opacity="0.04"/><circle cx="189" cy="471" r="2.4" fill="#4a2e20" opacity="0.07"/><circle cx="401" cy="379" r="1.8" fill="#4a2e20" opacity="0.08"/>
+  <circle cx="320" cy="222" r="136" fill="#fffdf8" opacity="0.85"/>
+  <circle cx="320" cy="222" r="136" fill="none" stroke="#f1e7d2" stroke-width="3"/><circle cx="320" cy="222" r="120" fill="#d99a2b"/>
+  <circle cx="320" cy="222" r="120" fill="none" stroke="#4a2e20" stroke-opacity="0.35" stroke-width="3"/>
+  <ellipse cx="286.4" cy="186" rx="54" ry="36" fill="#fff" opacity="0.16"/><g stroke="#4a2e20" stroke-opacity="0.5" stroke-width="3" stroke-linecap="round"><line x1="344" y1="222" x2="418.4" y2="222"/><line x1="336.97056274847716" y1="238.97056274847714" x2="389.5793072687563" y2="291.5793072687563"/><line x1="320" y1="246" x2="320" y2="320.4"/><line x1="303.02943725152284" y1="238.97056274847714" x2="250.42069273124372" y2="291.5793072687563"/><line x1="296" y1="222" x2="221.60000000000002" y2="222"/><line x1="303.02943725152284" y1="205.02943725152286" x2="250.42069273124372" y2="152.42069273124372"/><line x1="320" y1="198" x2="320" y2="123.60000000000001"/><line x1="336.97056274847716" y1="205.02943725152286" x2="389.5793072687562" y2="152.42069273124372"/></g>
+  
+</svg>

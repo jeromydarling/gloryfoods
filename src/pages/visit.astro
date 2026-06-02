@@ -1,0 +1,245 @@
+---
+import Base from "@layouts/Base.astro";
+import Icon from "@components/Icon.astro";
+import { site } from "@data/site";
+---
+<Base
+  title="Visit"
+  description={`Hours, directions, and how to reach ${site.name} in ${site.location.city}, ${site.location.regionCode}.`}
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Come by</p>
+      <h1 data-reveal data-reveal-delay="60">Follow the cardamom.</h1>
+      <p class="lede prose" data-reveal data-reveal-delay="120">
+        Find us in {site.location.neighborhood}, {site.location.city}. Order ahead for
+        pickup, or just walk in and let us welcome you.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container visit-grid">
+      <div class="visit-info" data-reveal>
+        <div class="visit-card">
+          <h2><Icon name="clock" size={22} /> Hours</h2>
+          <ul class="hours">
+            {
+              site.hours.map((h) => (
+                <li>
+                  <span>{h.day}</span>
+                  <span>{h.time}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div class="visit-card">
+          <h2><Icon name="pin" size={22} /> Find us</h2>
+          <p class="visit-addr">{site.location.addressLine}</p>
+          <ul class="visit-contact">
+            <li>
+              <Icon name="mail" size={18} />
+              <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+            </li>
+            <li>
+              <Icon name="phone" size={18} />
+              <a href={site.contact.phoneHref}>{site.contact.phone}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="visit-map" data-reveal data-reveal-delay="80" aria-label="Map placeholder">
+        <div class="visit-map__inner">
+          <Icon name="pin" size={40} />
+          <p>{site.location.neighborhood}</p>
+          <span>{site.location.city}, {site.location.regionCode}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact">
+    <div class="container contact-grid">
+      <div class="contact-copy" data-reveal>
+        <p class="eyebrow">Say hello</p>
+        <h2>Catering, big orders, or just a question?</h2>
+        <p class="lede prose">
+          Tell us what you're planning — a celebration loaf, a standing office
+          order, a wedding's worth of injera. There's room at the table for it.
+        </p>
+      </div>
+      <form class="contact-form card" data-contact novalidate data-reveal data-reveal-delay="80">
+        <div class="field">
+          <label for="c-name">Your name</label>
+          <input id="c-name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="c-email">Email</label>
+          <input id="c-email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="c-message">What can we bake for you?</label>
+          <textarea id="c-message" name="message" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--block">
+          Send message <Icon name="arrow" size={18} />
+        </button>
+        <p class="contact-status" data-contact-status role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-hero {
+    text-align: center;
+    padding-block: clamp(2.5rem, 7vw, 4.5rem) clamp(1rem, 3vw, 2rem);
+  }
+  .page-hero .lede {
+    margin-inline: auto;
+    margin-top: 1rem;
+  }
+  .visit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 4vw, 2.5rem);
+    align-items: stretch;
+  }
+  @media (max-width: 820px) {
+    .visit-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .visit-info {
+    display: grid;
+    gap: 1.5rem;
+    align-content: start;
+  }
+  .visit-card {
+    background: var(--surface);
+    border: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+    border-radius: var(--radius-lg);
+    padding: 1.6rem;
+    box-shadow: var(--shadow-sm);
+  }
+  .visit-card h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: var(--step-1);
+    margin-bottom: 1rem;
+  }
+  .visit-card h2 :global(svg) {
+    color: var(--gold-deep);
+  }
+  .hours {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.7rem;
+  }
+  .hours li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--ink) 7%, transparent);
+  }
+  .hours li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .hours span:first-child {
+    font-weight: 600;
+  }
+  .hours span:last-child {
+    color: var(--muted);
+  }
+  .visit-addr {
+    font-size: var(--step-1);
+    font-family: var(--font-display);
+    margin-bottom: 1rem;
+  }
+  .visit-contact {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .visit-contact li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .visit-contact :global(svg) {
+    color: var(--gold-deep);
+  }
+  .visit-map {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    min-height: 22rem;
+    background: linear-gradient(135deg, color-mix(in oklab, var(--green) 26%, var(--parchment)), color-mix(in oklab, var(--gold) 22%, var(--parchment)));
+    display: grid;
+    place-items: center;
+    border: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+  }
+  .visit-map__inner {
+    text-align: center;
+    color: var(--coffee);
+  }
+  .visit-map__inner :global(svg) {
+    margin-inline: auto;
+    color: var(--berbere);
+  }
+  .visit-map__inner p {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    margin-top: 0.5rem;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 5vw, 3.5rem);
+    align-items: center;
+  }
+  @media (max-width: 820px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .contact-form {
+    padding: clamp(1.5rem, 4vw, 2.2rem);
+    display: grid;
+    gap: 1rem;
+  }
+  .field {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .field label {
+    font-weight: 600;
+    font-size: var(--step--1);
+  }
+  .field input,
+  .field textarea {
+    padding: 0.8em 1em;
+    border-radius: var(--radius);
+    border: 1.5px solid color-mix(in oklab, var(--ink) 15%, transparent);
+    background: var(--parchment);
+    transition: border-color 0.2s var(--ease);
+    font-family: inherit;
+  }
+  .field input:focus,
+  .field textarea:focus {
+    border-color: var(--gold);
+    outline: none;
+  }
+  .contact-status {
+    min-height: 1.2em;
+    font-size: var(--step--1);
+    color: var(--green-bright);
+  }
+</style>

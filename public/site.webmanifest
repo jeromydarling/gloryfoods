@@ -1,0 +1,14 @@
+{
+  "name": "Selam Bakehouse",
+  "short_name": "Selam",
+  "description": "Ethiopian baking, the welcome of a shared table. St. Paul, MN.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#faf4e8",
+  "theme_color": "#1f4a33",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icon-180.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

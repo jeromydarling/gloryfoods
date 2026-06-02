@@ -1,0 +1,203 @@
+---
+import Base from "@layouts/Base.astro";
+import Icon from "@components/Icon.astro";
+import SubscriptionCard from "@components/SubscriptionCard.astro";
+import { subscriptions } from "@data/menu";
+
+const steps = [
+  { icon: "table", title: "Choose your box", body: "Weekly, every two weeks, or a generous monthly table." },
+  { icon: "bread", title: "We bake it fresh", body: "A rotating selection, made the morning it goes out." },
+  { icon: "gift", title: "A neighbor eats too", body: "A portion of every box bakes bread for someone going without." },
+];
+const faqs = [
+  { q: "Can I pause or cancel?", a: "Anytime, from the link in your confirmation email — no calls, no guilt. Pause for a vacation, skip a week, or stop whenever life shifts." },
+  { q: "Pickup or delivery?", a: "Both. Choose at checkout. Local delivery covers St. Paul and the nearer Minneapolis neighborhoods; pickup is always free at the bakehouse." },
+  { q: "What's in the box?", a: "It rotates with the season and what's baking best that week — always a mix of signature breads and a little something sweet." },
+  { q: "How does feeding a neighbor work?", a: "We partner with nearby community tables and pantries. Every billing cycle, a share of subscription revenue becomes fresh bread carried to families who need it." },
+];
+---
+<Base
+  title="Bread Boxes"
+  description="A fresh box of Ethiopian baking on your schedule — weekly, biweekly, or monthly. Pause anytime. A portion of every box feeds a neighbor."
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Bread boxes</p>
+      <h1 data-reveal data-reveal-delay="60">A standing place at the table.</h1>
+      <p class="lede prose" data-reveal data-reveal-delay="120">
+        Good bread, arriving like clockwork — and an act of welcome baked into
+        every delivery. Choose the rhythm that fits your home.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="grid cols-3 subs-grid">
+        {
+          subscriptions.map((item, i) => (
+            <SubscriptionCard item={item} featured={item.slug === "weekly-table"} delay={i * 80} />
+          ))
+        }
+      </div>
+      <p class="subs-fineprint center" data-reveal>
+        Billed securely through Stripe. Cancel or pause anytime. Prices in USD.
+      </p>
+    </div>
+  </section>
+
+  <section class="section how">
+    <div class="container">
+      <div class="section-head center" data-reveal>
+        <p class="eyebrow">How it works</p>
+        <h2>Three steps to a warmer week.</h2>
+      </div>
+      <ol class="how__grid">
+        {
+          steps.map((s, i) => (
+            <li class="how__step" data-reveal data-reveal-delay={i * 80}>
+              <span class="how__num">{i + 1}</span>
+              <span class="how__icon"><Icon name={s.icon} size={26} /></span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container faq">
+      <div class="section-head center" data-reveal>
+        <p class="eyebrow">Good to know</p>
+        <h2>Questions, answered.</h2>
+      </div>
+      <div class="faq__list">
+        {
+          faqs.map((f, i) => (
+            <details class="faq__item" data-reveal data-reveal-delay={i * 50}>
+              <summary>
+                <span>{f.q}</span>
+                <Icon name="plus" size={20} />
+              </summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-hero {
+    padding-block: clamp(2.5rem, 7vw, 4.5rem) clamp(0.5rem, 2vw, 1.5rem);
+    text-align: center;
+  }
+  .page-hero .lede {
+    margin-inline: auto;
+    margin-top: 1rem;
+  }
+  .subs-grid {
+    align-items: stretch;
+  }
+  .subs-fineprint {
+    margin-top: 2rem;
+    color: var(--ink-faint);
+    font-size: var(--step--1);
+  }
+  .section-head {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+  .how {
+    background: linear-gradient(180deg, transparent, color-mix(in oklab, var(--gold) 8%, transparent));
+  }
+  .how__grid {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: clamp(1.2rem, 3vw, 2rem);
+    counter-reset: step;
+  }
+  .how__step {
+    position: relative;
+    padding: 2rem 1.6rem;
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    border: 1px solid color-mix(in oklab, var(--ink) 7%, transparent);
+    box-shadow: var(--shadow-sm);
+  }
+  .how__num {
+    position: absolute;
+    top: -1rem;
+    right: 1.4rem;
+    font-family: var(--font-display);
+    font-size: 3rem;
+    color: color-mix(in oklab, var(--gold) 50%, transparent);
+    line-height: 1;
+  }
+  .how__icon {
+    display: grid;
+    place-items: center;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 16px;
+    background: color-mix(in oklab, var(--green) 14%, var(--cream));
+    color: var(--green);
+    margin-bottom: 1rem;
+  }
+  .how__step h3 {
+    font-size: var(--step-1);
+    margin-bottom: 0.4rem;
+  }
+  .how__step p {
+    color: var(--muted);
+  }
+
+  .faq {
+    max-width: 48rem;
+  }
+  .faq__list {
+    display: grid;
+    gap: 0.8rem;
+  }
+  .faq__item {
+    background: var(--surface);
+    border: 1px solid color-mix(in oklab, var(--ink) 9%, transparent);
+    border-radius: var(--radius);
+    padding: 0 1.3rem;
+    transition: box-shadow 0.3s var(--ease);
+  }
+  .faq__item[open] {
+    box-shadow: var(--shadow-sm);
+  }
+  .faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: var(--step-0);
+    list-style: none;
+  }
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq__item summary :global(svg) {
+    flex-shrink: 0;
+    color: var(--gold-deep);
+    transition: transform 0.3s var(--ease);
+  }
+  .faq__item[open] summary :global(svg) {
+    transform: rotate(45deg);
+  }
+  .faq__item p {
+    padding-bottom: 1.2rem;
+    color: var(--muted);
+    max-width: 60ch;
+  }
+</style>

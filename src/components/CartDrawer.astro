@@ -1,0 +1,182 @@
+---
+import Icon from "@components/Icon.astro";
+---
+<div class="cart-backdrop" data-cart-backdrop hidden></div>
+<aside
+  class="cart-drawer"
+  data-cart-drawer
+  aria-label="Your basket"
+  aria-hidden="true"
+  hidden
+>
+  <div class="cart-drawer__head">
+    <h2>Your basket</h2>
+    <button type="button" class="icon-btn" data-cart-close aria-label="Close basket">
+      <Icon name="close" size={22} />
+    </button>
+  </div>
+
+  <div class="cart-drawer__body" data-cart-body>
+    <!-- rendered by cart.ts -->
+  </div>
+
+  <div class="cart-empty" data-cart-empty>
+    <Icon name="bread" size={48} />
+    <p>Your basket is still warming up.</p>
+    <a href="/menu" class="btn btn--ghost" data-cart-close>Browse the menu</a>
+  </div>
+
+  <footer class="cart-drawer__foot" data-cart-foot hidden>
+    <div class="cart-subtotal">
+      <span>Subtotal</span>
+      <strong data-cart-subtotal>$0</strong>
+    </div>
+    <p class="cart-note">Pickup &amp; delivery details are chosen at checkout.</p>
+    <button type="button" class="btn btn--primary btn--block btn--lg" data-cart-checkout>
+      <span>Checkout</span>
+      <Icon name="arrow" size={20} />
+    </button>
+    <p class="cart-error" data-cart-error role="alert"></p>
+  </footer>
+</aside>
+
+<style>
+  .cart-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    background: color-mix(in oklab, var(--coffee) 45%, transparent);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+  }
+  .cart-backdrop[data-open] {
+    opacity: 1;
+  }
+  .cart-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 160;
+    height: 100svh;
+    width: min(27rem, 100vw);
+    background: var(--parchment);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.4s var(--ease);
+  }
+  .cart-drawer[data-open] {
+    transform: none;
+  }
+  .cart-drawer__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.3rem 1.4rem;
+    border-bottom: 1px solid color-mix(in oklab, var(--ink) 10%, transparent);
+  }
+  .cart-drawer__head h2 {
+    font-size: var(--step-1);
+  }
+  .cart-drawer__body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem 1.4rem;
+  }
+  .cart-empty {
+    position: absolute;
+    inset: 4rem 1.4rem auto;
+    top: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--ink-faint);
+    text-align: center;
+  }
+  .cart-drawer__foot {
+    padding: 1.2rem 1.4rem 1.5rem;
+    border-top: 1px solid color-mix(in oklab, var(--ink) 10%, transparent);
+    background: var(--cream);
+  }
+  .cart-subtotal {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: var(--step-1);
+    margin-bottom: 0.3rem;
+  }
+  .cart-subtotal strong {
+    font-family: var(--font-display);
+  }
+  .cart-note {
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+    margin-bottom: 0.9rem;
+  }
+  .cart-error {
+    color: var(--berbere);
+    font-size: var(--step--1);
+    margin-top: 0.6rem;
+    min-height: 1em;
+  }
+
+  /* line items (rendered by JS, styled here) */
+  :global(.cart-line) {
+    display: grid;
+    grid-template-columns: 4rem 1fr auto;
+    gap: 0.9rem;
+    align-items: center;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+  }
+  :global(.cart-line__img) {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 12px;
+    object-fit: cover;
+    background: var(--parchment-deep);
+  }
+  :global(.cart-line__name) {
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  :global(.cart-line__price) {
+    color: var(--ink-faint);
+    font-size: var(--step--1);
+  }
+  :global(.cart-qty) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.1rem;
+    margin-top: 0.4rem;
+    border: 1px solid color-mix(in oklab, var(--ink) 16%, transparent);
+    border-radius: 999px;
+    padding: 0.1rem;
+  }
+  :global(.cart-qty button) {
+    width: 1.7rem;
+    height: 1.7rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--ink);
+  }
+  :global(.cart-qty button:hover) {
+    background: color-mix(in oklab, var(--ink) 8%, transparent);
+  }
+  :global(.cart-qty span) {
+    min-width: 1.4rem;
+    text-align: center;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  :global(.cart-line__total) {
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+</style>

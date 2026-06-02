@@ -1,0 +1,196 @@
+---
+import Base from "@layouts/Base.astro";
+import Icon from "@components/Icon.astro";
+import { story, values } from "@data/values";
+import { site } from "@data/site";
+---
+<Base
+  title="Our Story"
+  description="How a borrowed oven and a sack of teff became a St. Paul bakehouse — and the promises we keep to our neighbors."
+>
+  <section class="page-hero story-hero">
+    <div class="container">
+      <p class="eyebrow" data-reveal>Our story</p>
+      <h1 data-reveal data-reveal-delay="60">A city is only as warm as its smallest tables.</h1>
+      <p class="lede prose" data-reveal data-reveal-delay="120">{story.lede}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container chapters">
+      {
+        story.chapters.map((c, i) => (
+          <article class="chapter" data-reveal data-reveal-delay={i * 60}>
+            <div class="chapter__media">
+              <img
+                src={`/images/story-${i + 1}.svg`}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                width="640"
+                height="520"
+              />
+            </div>
+            <div class="chapter__copy">
+              <span class="chapter__no">0{i + 1}</span>
+              <h2>{c.heading}</h2>
+              <p>{c.body}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section promises">
+    <div class="container">
+      <div class="section-head center" data-reveal>
+        <p class="eyebrow">What we keep</p>
+        <h2>Promises, not slogans.</h2>
+      </div>
+      <div class="grid cols-2 promises__grid">
+        {
+          values.map((v, i) => (
+            <article class="promise" data-reveal data-reveal-delay={(i % 2) * 70}>
+              <span class="promise__icon"><Icon name={v.icon} size={24} /></span>
+              <div>
+                <h3>{v.title}</h3>
+                <p>{v.body}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container story-cta" data-reveal>
+      <p lang="am" class="story-cta__amharic">{site.amharic.welcome}</p>
+      <h2>You're already welcome here.</h2>
+      <div class="story-cta__actions">
+        <a href="/menu" class="btn btn--primary btn--lg">Order fresh bread</a>
+        <a href="/visit" class="btn btn--ghost btn--lg">Come visit</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .story-hero {
+    text-align: center;
+    padding-block: clamp(2.5rem, 7vw, 4.5rem) clamp(1rem, 3vw, 2rem);
+  }
+  .story-hero .lede {
+    margin-inline: auto;
+    margin-top: 1rem;
+  }
+  .chapters {
+    display: grid;
+    gap: clamp(2.5rem, 6vw, 5rem);
+  }
+  .chapter {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(1.5rem, 5vw, 3.5rem);
+    align-items: center;
+  }
+  .chapter:nth-child(even) .chapter__media {
+    order: 2;
+  }
+  .chapter__media {
+    aspect-ratio: 5 / 4;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--parchment-deep);
+    box-shadow: var(--shadow-md);
+  }
+  .chapter__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .chapter__no {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    color: color-mix(in oklab, var(--gold) 60%, transparent);
+  }
+  .chapter__copy h2 {
+    font-size: var(--step-2);
+    margin: 0.3rem 0 0.8rem;
+  }
+  .chapter__copy p {
+    color: var(--muted);
+    max-width: 52ch;
+  }
+  @media (max-width: 760px) {
+    .chapter {
+      grid-template-columns: 1fr;
+    }
+    .chapter:nth-child(even) .chapter__media {
+      order: 0;
+    }
+  }
+
+  .promises {
+    background: linear-gradient(180deg, transparent, color-mix(in oklab, var(--green) 6%, transparent));
+  }
+  .section-head {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+  .promise {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid color-mix(in oklab, var(--ink) 7%, transparent);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+  .promise__icon {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 14px;
+    background: color-mix(in oklab, var(--berbere) 14%, var(--cream));
+    color: var(--berbere);
+  }
+  .promise h3 {
+    font-size: var(--step-1);
+    margin-bottom: 0.3rem;
+  }
+  .promise p {
+    color: var(--muted);
+  }
+
+  .story-cta {
+    text-align: center;
+    padding: clamp(2.5rem, 6vw, 4rem);
+    background: var(--coffee);
+    color: var(--cream);
+    border-radius: var(--radius-lg);
+    background-image: radial-gradient(circle at 20% -20%, color-mix(in oklab, var(--gold) 40%, transparent), transparent 50%);
+  }
+  .story-cta h2 {
+    color: var(--cream);
+  }
+  .story-cta__amharic {
+    font-family: var(--font-display);
+    color: var(--gold);
+    font-size: var(--step-2);
+    margin-bottom: 0.3rem;
+  }
+  .story-cta__actions {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+  .story-cta .btn--ghost {
+    color: var(--cream);
+    border-color: color-mix(in oklab, var(--cream) 40%, transparent);
+  }
+</style>

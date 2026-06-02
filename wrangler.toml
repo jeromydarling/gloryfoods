@@ -1,0 +1,31 @@
+# Cloudflare Pages configuration for Glory Foods (codename) — Selam Bakehouse.
+#
+# Static assets are built by Astro into ./dist and served from Cloudflare's
+# edge. The /functions directory is deployed automatically as Pages Functions
+# (the Stripe + orders API), with the bindings below available on `context.env`.
+#
+# Deploy:  npm run deploy        (astro build && wrangler pages deploy ./dist)
+# Secrets: set STRIPE_SECRET_KEY and STRIPE_WEBHOOK_SECRET via
+#          `wrangler pages secret put <NAME>` — never commit them.
+
+name = "glory-foods"
+compatibility_date = "2026-06-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "dist"
+
+# --- D1: orders, customers, subscriptions, catalog (authoritative pricing) ---
+[[d1_databases]]
+binding = "DB"
+database_name = "glory-foods-db"
+database_id = "d371beb3-0460-4d51-a5fa-462ae8637066"
+
+# --- KV: webhook idempotency, rate limiting, newsletter de-duplication ---
+[[kv_namespaces]]
+binding = "KV"
+id = "7b635d3f26c84435a88b86758df00817"
+
+# Non-secret, public-safe vars. Secrets (Stripe keys) are set out-of-band.
+[vars]
+SITE_URL = "https://glory-foods.pages.dev"
+BRAND_NAME = "Selam Bakehouse"
+ORDER_CURRENCY = "usd"
