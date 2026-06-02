@@ -1,0 +1,138 @@
+---
+import { formatPrice, type MenuItem } from "@data/menu";
+import Icon from "@components/Icon.astro";
+
+interface Props {
+  item: MenuItem;
+  delay?: number;
+}
+const { item, delay = 0 } = Astro.props;
+---
+<article class="product card" data-reveal data-reveal-delay={delay}>
+  <div class="product__media">
+    <img
+      src={item.image}
+      alt={item.alt}
+      loading="lazy"
+      decoding="async"
+      width="640"
+      height="480"
+    />
+    {
+      item.badges && item.badges.length > 0 && (
+        <div class="product__badges">
+          {item.badges.map((b) => <span class="tag">{b}</span>)}
+        </div>
+      )
+    }
+  </div>
+  <div class="product__body">
+    <div class="product__head">
+      <h3>{item.name}</h3>
+      <span class="product__price">{formatPrice(item.priceCents)}</span>
+    </div>
+    <p class="product__tagline">{item.tagline}</p>
+    <p class="product__desc">{item.description}</p>
+    <div class="product__foot">
+      <span class="product__unit">{item.unitLabel}</span>
+      <button type="button" class="btn btn--gold product__add" data-add={item.slug}>
+        <Icon name="plus" size={18} />
+        <span>Add</span>
+      </button>
+    </div>
+    {
+      item.allergens && item.allergens.length > 0 && (
+        <p class="product__allergens">Contains: {item.allergens.join(", ")}</p>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .product {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+  .product:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+  }
+  .product__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--parchment-deep);
+  }
+  .product__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease);
+  }
+  .product:hover .product__media img {
+    transform: scale(1.06);
+  }
+  .product__badges {
+    position: absolute;
+    top: 0.8rem;
+    left: 0.8rem;
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .product__badges .tag {
+    background: color-mix(in oklab, var(--cream) 88%, transparent);
+    box-shadow: var(--shadow-sm);
+  }
+  .product__body {
+    padding: 1.2rem 1.3rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+  }
+  .product__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.6rem;
+  }
+  .product__head h3 {
+    font-size: var(--step-1);
+  }
+  .product__price {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--step-1);
+    color: var(--berbere);
+    white-space: nowrap;
+  }
+  .product__tagline {
+    color: var(--gold-deep);
+    font-weight: 600;
+    font-size: var(--step--1);
+  }
+  .product__desc {
+    color: var(--muted);
+    font-size: var(--step-0);
+    line-height: 1.5;
+    flex: 1;
+  }
+  .product__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.8rem;
+    margin-top: 0.6rem;
+  }
+  .product__unit {
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+    text-transform: lowercase;
+  }
+  .product__allergens {
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+  }
+</style>

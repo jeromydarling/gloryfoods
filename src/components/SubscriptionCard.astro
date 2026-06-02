@@ -1,0 +1,140 @@
+---
+import { formatPrice, type MenuItem } from "@data/menu";
+import Icon from "@components/Icon.astro";
+
+interface Props {
+  item: MenuItem;
+  featured?: boolean;
+  delay?: number;
+}
+const { item, featured = false, delay = 0 } = Astro.props;
+const per = item.interval ? `/ ${item.interval.label}` : "";
+---
+<article
+  class:list={["sub card", { "sub--featured": featured }]}
+  data-reveal
+  data-reveal-delay={delay}
+>
+  {featured && <div class="sub__ribbon"><Icon name="star" size={14} />Most loved</div>}
+  <div class="sub__media">
+    <img src={item.image} alt={item.alt} loading="lazy" decoding="async" width="560" height="420" />
+  </div>
+  <div class="sub__body">
+    <h3>{item.name}</h3>
+    <p class="sub__tagline">{item.tagline}</p>
+    <p class="sub__price">
+      <strong>{formatPrice(item.priceCents)}</strong> <span>{per}</span>
+    </p>
+    <p class="sub__desc">{item.description}</p>
+    <ul class="sub__perks">
+      <li><Icon name="check" size={18} /> Fresh-baked, never frozen</li>
+      <li><Icon name="check" size={18} /> Pickup or local delivery</li>
+      <li><Icon name="check" size={18} /> Pause or cancel anytime</li>
+      <li><Icon name="check" size={18} /> Feeds a neighbor with every box</li>
+    </ul>
+    <button
+      type="button"
+      class:list={["btn", "btn--block", featured ? "btn--primary" : "btn--ghost"]}
+      data-add={item.slug}
+    >
+      Start {item.name}
+    </button>
+  </div>
+</article>
+
+<style>
+  .sub {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    position: relative;
+  }
+  .sub:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+  }
+  .sub--featured {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px var(--gold), var(--shadow-md);
+  }
+  .sub__ribbon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    background: var(--gold);
+    color: var(--ink);
+    padding: 0.35em 0.8em;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-sm);
+  }
+  .sub__media {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--parchment-deep);
+  }
+  .sub__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s var(--ease);
+  }
+  .sub:hover .sub__media img {
+    transform: scale(1.05);
+  }
+  .sub__body {
+    padding: 1.4rem 1.4rem 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+  }
+  .sub__body h3 {
+    font-size: var(--step-2);
+  }
+  .sub__tagline {
+    color: var(--gold-deep);
+    font-weight: 600;
+  }
+  .sub__price {
+    margin: 0.3rem 0;
+  }
+  .sub__price strong {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    color: var(--berbere);
+  }
+  .sub__price span {
+    color: var(--ink-faint);
+  }
+  .sub__desc {
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .sub__perks {
+    list-style: none;
+    padding: 0;
+    margin: 0.6rem 0 1.2rem;
+    display: grid;
+    gap: 0.5rem;
+    flex: 1;
+  }
+  .sub__perks li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--ink-soft);
+    font-size: var(--step-0);
+  }
+  .sub__perks :global(svg) {
+    color: var(--green-bright);
+    flex-shrink: 0;
+  }
+</style>

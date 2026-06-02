@@ -1,0 +1,10 @@
+# Copy to `.dev.vars` for local `wrangler pages dev`. NEVER commit real keys.
+# In production these are set with `wrangler pages secret put <NAME>`.
+
+# Stripe — use test keys (sk_test_...) for local development.
+STRIPE_SECRET_KEY="sk_test_xxx"
+STRIPE_WEBHOOK_SECRET="whsec_xxx"
+
+# Public site URL used to build Checkout success/cancel redirect URLs.
+SITE_URL="http://localhost:8788"
+ORDER_CURRENCY="usd"

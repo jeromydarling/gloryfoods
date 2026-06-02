@@ -1,0 +1,34 @@
+{
+  "name": "glory-foods",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Selam Bakehouse — Ethiopian baking from St. Paul, MN. Astro + Cloudflare Pages + D1 + Stripe.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "wrangler pages dev ./dist --d1=DB --kv=KV",
+    "astro": "astro",
+    "check": "astro check",
+    "db:local": "wrangler d1 execute glory-foods-db --local --file=./db/schema.sql && wrangler d1 execute glory-foods-db --local --file=./db/seed.sql",
+    "db:migrate": "wrangler d1 execute glory-foods-db --remote --file=./db/schema.sql",
+    "db:seed": "wrangler d1 execute glory-foods-db --remote --file=./db/seed.sql",
+    "deploy": "astro build && wrangler pages deploy ./dist"
+  },
+  "dependencies": {
+    "@fontsource-variable/fraunces": "^5.2.5",
+    "@fontsource-variable/hanken-grotesk": "^5.2.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/sitemap": "^3.4.0",
+    "@cloudflare/workers-types": "^4.20250601.0",
+    "astro": "^5.9.0",
+    "typescript": "^5.8.3",
+    "wrangler": "^4.96.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
