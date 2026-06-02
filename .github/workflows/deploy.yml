@@ -60,10 +60,20 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: d1 execute glory-foods-db --remote --file=./db/seed.sql
 
+      # `pages deploy` errors if the project doesn't exist yet. Create it on the
+      # first run; on later runs this fails harmlessly (continue-on-error).
+      - name: Ensure Pages project exists
+        continue-on-error: true
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages project create glory-foods --production-branch=main
+
       - name: Deploy to Cloudflare Pages
         id: deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ./dist --project-name=glory-foods --branch=main
+          command: pages deploy ./dist --project-name=glory-foods --branch=main --commit-dirty=true
