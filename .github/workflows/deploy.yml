@@ -1,0 +1,69 @@
+name: Deploy to Cloudflare Pages
+
+# Auto-deploys the storefront on every push to main (and on demand).
+# The GitHub runner is a separate machine, so it authenticates to Cloudflare
+# with two repository secrets (set once, Settings → Secrets → Actions):
+#   CLOUDFLARE_API_TOKEN   — token with "Cloudflare Pages: Edit" + "D1: Edit"
+#   CLOUDFLARE_ACCOUNT_ID  — your account id
+#
+# Stripe keys are Pages runtime secrets (set via `wrangler pages secret put`)
+# and are NOT needed here — they persist on the project across deploys.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: ${{ steps.deploy.outputs.deployment-url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type-check
+        run: npx astro check
+
+      - name: Build
+        run: npm run build
+
+      # D1 schema + catalog are idempotent (IF NOT EXISTS / INSERT OR REPLACE).
+      - name: Apply D1 schema
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: d1 execute glory-foods-db --remote --file=./db/schema.sql
+
+      - name: Seed D1 catalog
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: d1 execute glory-foods-db --remote --file=./db/seed.sql
+
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy ./dist --project-name=glory-foods --branch=main

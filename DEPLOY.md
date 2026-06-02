@@ -76,6 +76,27 @@ npm run deploy
 4. Submit the contact + newsletter forms; confirm rows in `contact_messages` /
    `newsletter_subscribers`.
 
+## Continuous deployment (GitHub Actions)
+
+`.github/workflows/deploy.yml` deploys on every push to `main` (and via "Run
+workflow"): it type-checks, builds, applies the idempotent D1 schema + seed, then
+runs `wrangler pages deploy`. `.github/workflows/ci.yml` builds + type-checks every PR.
+
+**One-time setup** — add two repository secrets (GitHub → Settings → Secrets and
+variables → Actions → New repository secret):
+
+| Secret                  | Value |
+|-------------------------|-------|
+| `CLOUDFLARE_ACCOUNT_ID` | Your account id (Cloudflare dashboard → Workers & Pages → right sidebar). |
+| `CLOUDFLARE_API_TOKEN`  | Create at dashboard → My Profile → API Tokens → Create Token. Permissions: **Account › Cloudflare Pages › Edit** and **Account › D1 › Edit**. |
+
+The runner needs these because CI runs on GitHub's machines, not your Cloudflare
+account — this is the only credential step, and it's set once. Stripe keys stay as
+Pages runtime secrets (above) and are untouched by deploys.
+
+After secrets are set, merge to `main` (or trigger the workflow) and the site ships to
+`https://glory-foods.pages.dev`.
+
 ## Rename the brand
 
 Edit [`src/data/site.ts`](src/data/site.ts) (`name`, `legalName`, `tagline`, contact,
