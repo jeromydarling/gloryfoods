@@ -59,10 +59,19 @@ Stripe dashboard → Developers → Webhooks → **Add endpoint**:
   `customer.subscription.deleted`
 - Copy the signing secret (`whsec_…`) into the secret in step 4, then redeploy.
 
-## 6. Optional — real photography (Workers AI / Flux)
+## 6. Real photography (Workers AI / Flux)
+
+The site ships with on-brand SVG art. To replace it with Flux photography, run the
+**"Generate Flux imagery"** GitHub Action (Actions → Run workflow). It renders the
+images on a runner — where egress to `api.cloudflare.com` is open — using the same
+`CLOUDFLARE_API_TOKEN` as deploy (which must also include **Account › Workers AI ›
+Read**), then commits the JPEGs and switches the image refs. The deploy workflow
+ships them on the next push to `main`.
+
+Locally instead (open network required):
 
 ```bash
-export CLOUDFLARE_ACCOUNT_ID=...  CLOUDFLARE_API_TOKEN=...   # Workers AI scope
+export CLOUDFLARE_ACCOUNT_ID=...  CLOUDFLARE_API_TOKEN=...   # + Workers AI scope
 node scripts/generate-flux-images.mjs --apply
 npm run deploy
 ```

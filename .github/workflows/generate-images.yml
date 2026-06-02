@@ -1,0 +1,60 @@
+name: Generate Flux imagery
+
+# Renders real photography with Cloudflare Workers AI (Flux) and commits it.
+#
+# Runs on GitHub's runners (open egress to api.cloudflare.com) — this is why it
+# lives in CI rather than the locked-down dev sandbox. Uses the same
+# CLOUDFLARE_API_TOKEN as the deploy workflow; that token must also include the
+# "Account › Workers AI › Read" permission for model inference.
+#
+# Trigger manually: Actions → "Generate Flux imagery" → Run workflow.
+# It calls scripts/generate-flux-images.mjs --apply (renders JPEGs, switches the
+# site's image refs from .svg to .jpg), then commits the result. The deploy
+# workflow then ships the photography on the next push to main.
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Branch to commit generated images to
+        default: main
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Render images with Workers AI (Flux)
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: node scripts/generate-flux-images.mjs --apply
+
+      - name: Verify it still builds
+        run: npm run build
+
+      - name: Commit generated imagery
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/images src/data/menu.ts src/pages/index.astro src/pages/our-story.astro src/components/SEO.astro
+          if git diff --cached --quiet; then
+            echo "No image changes to commit."
+          else
+            git commit -m "Add Flux-generated photography (Workers AI)"
+            git push origin HEAD:${{ github.event.inputs.branch }}
+          fi

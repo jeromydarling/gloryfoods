@@ -76,11 +76,11 @@ if (APPLY && ok > 0) {
   for (const rel of targets) {
     const p = join(ROOT, rel);
     let src = readFileSync(p, "utf8");
+    // Note: og-default stays SVG (it's a text card, not in the Flux manifest).
     src = src
       .replace(/\/images\/menu\/([a-z0-9-]+)\.svg/g, "/images/menu/$1.jpg")
       .replace(/\/images\/hero\.svg/g, "/images/hero.jpg")
-      .replace(/\/images\/story-(\$\{i \+ 1\}|\d)\.svg/g, "/images/story-$1.jpg")
-      .replace(/\/images\/og-default\.svg/g, "/images/og-default.jpg");
+      .replace(/\/images\/story-(\$\{i \+ 1\}|\d)\.svg/g, "/images/story-$1.jpg");
     writeFileSync(p, src);
   }
   console.log("Applied .jpg references. Rebuild with `npm run build`.");
