@@ -13,6 +13,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch: {}
+  # The image workflow commits with GITHUB_TOKEN, whose pushes do NOT trigger
+  # the `push` event above. Chain off its completion instead so freshly
+  # generated Flux photography always gets deployed.
+  workflow_run:
+    workflows: ["Generate Flux imagery"]
+    types: [completed]
 
 concurrency:
   group: deploy-${{ github.ref }}
@@ -25,6 +31,8 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Skip only when chained off a *failed* image run; always run otherwise.
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: production
       url: ${{ steps.deploy.outputs.deployment-url }}
