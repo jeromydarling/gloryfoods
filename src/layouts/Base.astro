@@ -17,6 +17,9 @@ const { title, description, image, noindex } = Astro.props;
 <html lang="en">
   <head>
     <SEO title={title} description={description} image={image} noindex={noindex} />
+    <!-- Mark JS available before paint so scroll-reveal can hide its initial
+         state. No-JS visitors keep all content fully visible. -->
+    <script is:inline>document.documentElement.classList.add("js");</script>
   </head>
   <body>
     <a href="#main" class="skip-link">Skip to content</a>

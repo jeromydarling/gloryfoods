@@ -1,0 +1,23 @@
+{
+  "_comment": "Prompts for Cloudflare Workers AI (Flux) photography. Each entry maps an output file to a prompt. Run scripts/generate-flux-images.mjs to render. Style is kept consistent: warm natural light, shallow depth of field, rustic St. Paul bakery, parchment + wood tones.",
+  "_style": "professional food photography, warm natural window light, shallow depth of field, rustic wooden table, soft parchment background, appetizing, editorial, no text, no watermark",
+  "images": [
+    { "file": "images/hero.jpg", "prompt": "An abundant overhead spread of freshly baked Ethiopian breads on a warm wooden table — a golden cardamom himbasha scored in a sunburst, a honey-glazed dabo, a rolled stack of teff injera, a small bag of roasted coffee beans, scattered nigella seeds" },
+    { "file": "images/menu/himbasha.jpg", "prompt": "A single round golden himbasha celebration bread scored in a sunburst pattern, lightly dusted with seeds, on parchment" },
+    { "file": "images/menu/dabo.jpg", "prompt": "A rustic round honey-spiced Ethiopian dabo loaf with a deep amber crust flecked with nigella seeds, on a wooden board" },
+    { "file": "images/menu/difo-dabo.jpg", "prompt": "An oversized burnished Ethiopian difo dabo celebration loaf resting on a woven mesob basket" },
+    { "file": "images/menu/injera.jpg", "prompt": "A rolled stack of soft spongy teff injera flatbread showing its lacy fermented surface, on a plate" },
+    { "file": "images/menu/ambasha-berbere.jpg", "prompt": "A deep red-gold berbere ambasha bread torn open to reveal a soft spiced crumb, steam rising" },
+    { "file": "images/menu/kita.jpg", "prompt": "A stack of four thin freckled Ethiopian kita flatbreads on parchment paper" },
+    { "file": "images/menu/mushabek.jpg", "prompt": "Bright orange lattice-like mushabek sweet spirals glistening with saffron syrup on a small plate" },
+    { "file": "images/menu/buna-cookies.jpg", "prompt": "A plate of deep-brown coffee and cardamom shortbread cookies beside scattered roasted coffee beans" },
+    { "file": "images/menu/dabo-kolo.jpg", "prompt": "A scattered pile of small golden toasted dabo kolo crunch nuggets in a paper bag" },
+    { "file": "images/menu/buna.jpg", "prompt": "A kraft paper bag of whole roasted Yirgacheffe coffee beans spilling onto a wooden board" },
+    { "file": "images/menu/weekly-table.jpg", "prompt": "A linen-lined box filled with assorted Ethiopian breads and a sweet, ready for delivery" },
+    { "file": "images/menu/biweekly-hearth.jpg", "prompt": "A small linen-lined box holding two Ethiopian breads and a wrapped sweet on a warm cloth" },
+    { "file": "images/menu/monthly-gursha.jpg", "prompt": "An abundant monthly gift box with a large feast loaf, several breads, a sweet, and a bag of coffee" },
+    { "file": "images/story-1.jpg", "prompt": "A home kitchen scene with hands flouring dough on a wooden counter, morning light through a window" },
+    { "file": "images/story-2.jpg", "prompt": "Close-up of teff injera batter fermenting in a ceramic bowl beside cardamom pods and a small sack of teff flour" },
+    { "file": "images/story-3.jpg", "prompt": "A warm community table with shared Ethiopian bread being passed between hands, candid and inviting" }
+  ]
+}

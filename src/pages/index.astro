@@ -7,9 +7,10 @@ import { site } from "@data/site";
 import { menu, subscriptions } from "@data/menu";
 import { values } from "@data/values";
 
-const featured = menu.filter((m) =>
-  ["himbasha", "dabo", "injera", "mushabek"].includes(m.slug)
-);
+const featuredSlugs = ["himbasha", "injera", "mushabek"];
+const featured = featuredSlugs
+  .map((slug) => menu.find((m) => m.slug === slug))
+  .filter((m): m is (typeof menu)[number] => Boolean(m));
 const weekly = subscriptions.find((s) => s.slug === "weekly-table")!;
 ---
 <Base>
@@ -43,7 +44,7 @@ const weekly = subscriptions.find((s) => s.slug === "weekly-table")!;
       <div class="hero__art" data-reveal data-reveal-delay="120">
         <div class="hero__plate drift">
           <img
-            src="/images/hero.webp"
+            src="/images/hero.svg"
             alt="A spread of freshly baked Ethiopian breads — himbasha, honeyed dabo, and rolled injera — on a warm wooden table."
             width="720"
             height="820"
