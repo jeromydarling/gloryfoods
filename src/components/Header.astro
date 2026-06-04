@@ -24,7 +24,8 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
           <circle cx="20" cy="20" r="3.4" fill="var(--green)"></circle>
         </svg>
       </span>
-      <span class="brand__name">{site.name}</span>
+      <span class="brand__name brand__name--full">{site.name}</span>
+      <span class="brand__name brand__name--short" aria-hidden="true">{site.shortName}</span>
     </a>
 
     <nav class="site-nav" aria-label="Primary">
@@ -120,6 +121,18 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
   .brand:hover .brand__mark {
     transform: rotate(45deg);
   }
+  /* Full wordmark by default; compact "Vibes C&B" on small screens. */
+  .brand__name--short {
+    display: none;
+  }
+  @media (max-width: 560px) {
+    .brand__name--full {
+      display: none;
+    }
+    .brand__name--short {
+      display: inline;
+    }
+  }
   .site-nav {
     margin-inline-start: auto;
   }
@@ -192,6 +205,11 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
     display: grid;
     place-items: center;
     line-height: 1;
+  }
+  /* `display: grid` above overrides the UA [hidden] rule — restore it so the
+     badge truly disappears when the basket is empty. */
+  .cart-count[hidden] {
+    display: none;
   }
   .nav-toggle {
     display: none;
