@@ -7,6 +7,8 @@
  */
 export const site = {
   name: "Vibes Cuisine and Bakery",
+  // Compact wordmark for small screens (header logo on mobile).
+  shortName: "Vibes C&B",
   codename: "Glory Foods",
   legalName: "Vibes Cuisine and Bakery LLC",
   // ሰላም (selam) — "peace"; the everyday Amharic greeting and farewell.
