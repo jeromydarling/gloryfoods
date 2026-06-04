@@ -45,7 +45,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
   const currency = (env.ORDER_CURRENCY ?? "usd").toLowerCase();
   const siteUrl = (env.SITE_URL ?? new URL(request.url).origin).replace(/\/$/, "");
-  const brand = env.BRAND_NAME ?? "Selam Bakehouse";
+  const brand = env.BRAND_NAME ?? "Vibes Cuisine and Bakery";
 
   const lineItems = lines.map(({ product, quantity }) => {
     const price_data: Record<string, unknown> = {

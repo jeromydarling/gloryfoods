@@ -305,10 +305,12 @@ for (let i = 0; i < 3; i++) {
     h = 630,
     cx = w / 2,
     cy = h / 2;
+  const tx = cx + 90;
   const inner = `${plate(cx - 360, cy, 150)}${roundLoaf(cx - 360, cy, 150, C.gold, true)}
-    <text x="${cx + 60}" y="${cy - 40}" text-anchor="middle" font-family="Georgia, serif" font-size="76" fill="${C.coffee}">Selam Bakehouse</text>
-    <text x="${cx + 60}" y="${cy + 36}" text-anchor="middle" font-family="Georgia, serif" font-size="34" font-style="italic" fill="${C.berbere}">Ethiopian baking, the welcome of a shared table.</text>
-    <text x="${cx + 60}" y="${cy + 96}" text-anchor="middle" font-family="Georgia, serif" font-size="26" fill="${C.green}">St. Paul, Minnesota</text>`;
+    <text x="${tx}" y="${cy - 58}" text-anchor="middle" font-family="Georgia, serif" font-size="62" fill="${C.coffee}">Vibes Cuisine</text>
+    <text x="${tx}" y="${cy + 14}" text-anchor="middle" font-family="Georgia, serif" font-size="62" fill="${C.coffee}">and Bakery</text>
+    <text x="${tx}" y="${cy + 74}" text-anchor="middle" font-family="Georgia, serif" font-size="30" font-style="italic" fill="${C.berbere}">Ethiopian baking, the welcome of a shared table.</text>
+    <text x="${tx}" y="${cy + 122}" text-anchor="middle" font-family="Georgia, serif" font-size="25" fill="${C.green}">St. Paul, Minnesota</text>`;
   writeFileSync(join(OUT, "og-default.svg"), frame(w, h, PALETTES.hero, 400, inner, ""));
   count++;
 }

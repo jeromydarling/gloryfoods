@@ -1,4 +1,4 @@
-# Deployment runbook — Glory Foods / Selam Bakehouse
+# Deployment runbook — Glory Foods / Vibes Cuisine and Bakery
 
 Everything is built and ready. This is the short, ordered checklist to go live on
 Cloudflare Pages. The Stripe keys are intentionally **not** in the repo — they are the

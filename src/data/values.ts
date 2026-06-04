@@ -46,11 +46,11 @@ export const values: Value[] = [
 
 /** Short narrative beats for the "Our Story" page. */
 export const story = {
-  lede: "Selam Bakehouse began with a borrowed oven, a sack of teff, and the conviction that a city is only as warm as the welcome at its smallest tables.",
+  lede: "Vibes Cuisine and Bakery began with a borrowed oven, a sack of teff, and the conviction that a city is only as warm as the welcome at its smallest tables.",
   chapters: [
     {
       heading: "From a home kitchen in St. Paul",
-      body: "It started the way most good things do — with too much bread and not enough people to give it to. Sunday loaves for neighbors became standing orders, and standing orders became a small bakehouse on the Midway, where the smell of cardamom now finds the sidewalk before you reach the door.",
+      body: "It started the way most good things do — with too much bread and not enough people to give it to. Sunday loaves for neighbors became standing orders, and standing orders became a small bakery on the Midway, where the smell of cardamom now finds the sidewalk before you reach the door.",
     },
     {
       heading: "Recipes that crossed an ocean",

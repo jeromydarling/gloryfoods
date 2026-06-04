@@ -6,13 +6,13 @@
  * the brand everywhere — no other edits required.
  */
 export const site = {
-  name: "Selam Bakehouse",
+  name: "Vibes Cuisine and Bakery",
   codename: "Glory Foods",
-  legalName: "Selam Bakehouse LLC",
+  legalName: "Vibes Cuisine and Bakery LLC",
   // ሰላም (selam) — "peace"; the everyday Amharic greeting and farewell.
   tagline: "Ethiopian baking, the welcome of a shared table.",
   shortDescription:
-    "A small Ethiopian bakehouse in St. Paul, baking the breads and sweets of home — and setting a place for everyone who comes to the table.",
+    "A Ethiopian bakery in St. Paul, baking the breads and sweets of home — and setting a place for everyone who comes to the table.",
   location: {
     neighborhood: "Hamline–Midway",
     city: "St. Paul",
@@ -22,7 +22,7 @@ export const site = {
     addressLine: "Hamline–Midway, St. Paul, MN",
   },
   contact: {
-    email: "hello@selambakehouse.com",
+    email: "hello@vibescuisineandbakery.com",
     phone: "+1 (651) 555-0142",
     phoneHref: "tel:+16515550142",
   },

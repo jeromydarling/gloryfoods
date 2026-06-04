@@ -1,4 +1,4 @@
--- Seed catalog for Glory Foods (codename) — Selam Bakehouse.
+-- Seed catalog for Glory Foods (codename) — Vibes Cuisine and Bakery.
 -- Authoritative pricing lives here. Re-runnable: INSERT OR REPLACE by slug.
 -- Keep amounts in sync with src/data/menu.ts (the display copy).
 

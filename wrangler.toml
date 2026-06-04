@@ -1,4 +1,4 @@
-# Cloudflare Pages configuration for Glory Foods (codename) — Selam Bakehouse.
+# Cloudflare Pages configuration for Glory Foods (codename) — Vibes Cuisine and Bakery.
 #
 # Static assets are built by Astro into ./dist and served from Cloudflare's
 # edge. The /functions directory is deployed automatically as Pages Functions
@@ -27,5 +27,5 @@ id = "7b635d3f26c84435a88b86758df00817"
 # Non-secret, public-safe vars. Secrets (Stripe keys) are set out-of-band.
 [vars]
 SITE_URL = "https://glory-foods.pages.dev"
-BRAND_NAME = "Selam Bakehouse"
+BRAND_NAME = "Vibes Cuisine and Bakery"
 ORDER_CURRENCY = "usd"
