@@ -6,7 +6,7 @@
 import { allItems, formatPrice, type MenuItem } from "@data/menu";
 
 type Cart = Record<string, number>; // slug -> quantity
-const KEY = "selam-cart-v1";
+const KEY = "vibes-cart-v1";
 const MAX_QTY = 24;
 
 const itemMap = new Map<string, MenuItem>(allItems.map((i) => [i.slug, i]));

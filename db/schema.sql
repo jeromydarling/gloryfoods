@@ -1,4 +1,4 @@
--- Glory Foods (codename) — Selam Bakehouse
+-- Glory Foods (codename) — Vibes Cuisine and Bakery
 -- D1 schema. Safe to re-run: every object uses IF NOT EXISTS.
 --
 -- Design notes:

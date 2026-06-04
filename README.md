@@ -1,6 +1,6 @@
-# Glory Foods · Selam Bakehouse
+# Glory Foods · Vibes Cuisine and Bakery
 
-> **Codename:** Glory Foods. **Working brand:** Selam Bakehouse — Ethiopian baking from St. Paul, MN.
+> **Codename:** Glory Foods. **Working brand:** Vibes Cuisine and Bakery — Ethiopian baking from St. Paul, MN.
 > Rename everywhere by editing one file: [`src/data/site.ts`](src/data/site.ts).
 
 A production-ready storefront MVP for a neighborhood Ethiopian bakery: a beautiful,
