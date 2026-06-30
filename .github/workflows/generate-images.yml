@@ -66,3 +66,15 @@ jobs:
             git commit -m "Add Flux-generated photography (Workers AI)"
             git push origin HEAD:${{ env.TARGET_BRANCH }}
           fi
+
+      # Cloudflare's Git build does not rebuild this bot commit, so deploy the
+      # Worker directly to publish the new photography. Requires the token to
+      # also have "Workers Scripts: Edit"; if it doesn't, this step is skipped
+      # without failing the run (deploy then happens on the next normal push).
+      - name: Deploy the Worker (publish the new images)
+        continue-on-error: true
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
