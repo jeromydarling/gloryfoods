@@ -4,14 +4,14 @@ import Icon from "@components/Icon.astro";
 import ProductCard from "@components/ProductCard.astro";
 import { menu, categoryLabels, type Category } from "@data/menu";
 
-const order: Category[] = ["breads", "sweets", "pantry"];
+const order: Category[] = ["breads", "cakes", "sweets", "drinks", "pantry"];
 const grouped = order
   .map((cat) => ({ cat, items: menu.filter((m) => m.category === cat) }))
   .filter((g) => g.items.length > 0);
 ---
 <Base
   title="Menu"
-  description="Freshly baked Ethiopian breads, sweets, and ceremony-grade coffee — order ahead for pickup or local delivery in St. Paul."
+  description="Freshly baked Eritrean/Ethiopian breads, sweets, and ceremony-grade coffee — order ahead for pickup or local delivery in St. Paul."
 >
   <section class="page-hero">
     <div class="container">
@@ -23,7 +23,7 @@ const grouped = order
       </p>
       <nav class="menu-jump" aria-label="Menu sections" data-reveal data-reveal-delay="180">
         {grouped.map((g) => <a href={`#${g.cat}`}>{categoryLabels[g.cat]}</a>)}
-        <a href="/subscriptions">Bread Boxes</a>
+        <a href="/subscriptions">Boxes</a>
       </nav>
     </div>
   </section>
@@ -51,7 +51,7 @@ const grouped = order
         <h2>Never run out of good bread.</h2>
         <p class="lede">Let a fresh box arrive on a schedule — and feed a neighbor while you're at it.</p>
       </div>
-      <a href="/subscriptions" class="btn btn--gold btn--lg">See the bread boxes <Icon name="arrow" size={18} /></a>
+      <a href="/subscriptions" class="btn btn--gold btn--lg">See the boxes <Icon name="arrow" size={18} /></a>
     </div>
   </section>
 </Base>

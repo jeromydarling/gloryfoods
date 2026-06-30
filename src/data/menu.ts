@@ -7,7 +7,13 @@
  * never overcharge or undercharge a guest.
  */
 
-export type Category = "breads" | "sweets" | "pantry" | "subscription";
+export type Category =
+  | "breads"
+  | "cakes"
+  | "sweets"
+  | "drinks"
+  | "pantry"
+  | "subscription";
 
 export interface MenuItem {
   slug: string;
@@ -27,31 +33,32 @@ export interface MenuItem {
 }
 
 export const menu: MenuItem[] = [
+  // ---- Breads ------------------------------------------------------------
   {
     slug: "himbasha",
     name: "Himbasha",
-    tagline: "Cardamom celebration bread",
+    tagline: "Cinnamon-raisin celebration bread (vegan)",
     description:
-      "A tender, lightly sweet wheat bread scented with cardamom and scored in a sunburst — baked for the days that deserve a little ceremony.",
+      "A tender, lightly sweet celebration bread scored in a sunburst — our vegan version, warm with cinnamon and plump raisins. The Eritrean–Ethiopian bread of days worth marking.",
     category: "breads",
     priceCents: 1400,
     unitLabel: "round loaf",
     image: "/images/menu/himbasha.jpg",
-    alt: "Round golden himbasha bread scored in a sunburst pattern, dusted lightly with seeds.",
-    badges: ["Signature"],
+    alt: "Round golden himbasha bread scored in a sunburst pattern, studded with raisins.",
+    badges: ["Signature", "Vegan"],
     allergens: ["wheat"],
   },
   {
     slug: "dabo",
     name: "Dabo",
-    tagline: "Honey & nigella spice loaf",
+    tagline: "Honey & black seed spice loaf",
     description:
-      "Yemarina yewotet dabo. A soft honeyed loaf with nigella and cardamom — the bread that has welcomed guests to Ethiopian tables for generations.",
+      "A soft honeyed loaf with black seed and cardamom — the bread that has welcomed guests to Eritrean and Ethiopian tables for generations.",
     category: "breads",
     priceCents: 1200,
     unitLabel: "loaf",
     image: "/images/menu/dabo.jpg",
-    alt: "A rustic round honey-spiced dabo loaf, deep amber crust flecked with nigella seeds.",
+    alt: "A rustic round honey-spiced dabo loaf, deep amber crust flecked with black seed.",
     allergens: ["wheat"],
   },
   {
@@ -69,31 +76,111 @@ export const menu: MenuItem[] = [
     allergens: ["wheat"],
   },
   {
-    slug: "injera",
-    name: "Injera",
-    tagline: "Naturally fermented teff sourdough",
+    slug: "awaze-dabo",
+    name: "Awaze Dabo",
+    tagline: "Spiced with awaze",
     description:
-      "Five sheets of teff injera, fermented slowly for that signature gentle sour and lacy eyes. Naturally gluten-free grain.",
-    category: "breads",
-    priceCents: 1100,
-    unitLabel: "5 sheets",
-    image: "/images/menu/injera.jpg",
-    alt: "A rolled stack of soft, spongy teff injera flatbread showing its lacy fermented surface.",
-    badges: ["Teff", "Vegan"],
-    allergens: [],
-  },
-  {
-    slug: "ambasha-berbere",
-    name: "Berbere Ambasha",
-    tagline: "Savory, spiced, golden",
-    description:
-      "Our himbasha's bold cousin — enriched with niter kibbeh and a whisper of berbere. Wonderful torn warm and shared.",
+      "Soft bread folded with awaze — the deep, smoky berbere paste — for a loaf with a gentle warmth. Wonderful torn and shared.",
     category: "breads",
     priceCents: 1300,
     unitLabel: "round loaf",
-    image: "/images/menu/ambasha-berbere.jpg",
-    alt: "A deep red-gold berbere ambasha loaf, torn open to show a soft spiced crumb.",
+    image: "/images/menu/awaze-dabo.svg",
+    alt: "A deep red-gold awaze-spiced bread torn open to show a soft, warmly spiced crumb.",
+    badges: ["Vegan"],
+    allergens: ["wheat"],
+  },
+  {
+    slug: "kibe-dabo",
+    name: "Kibe Dabo",
+    tagline: "Spiced-butter bread",
+    description:
+      "Enriched with kibe — fragrant spiced clarified butter — for a rich, golden crumb that needs nothing but your hands.",
+    category: "breads",
+    priceCents: 1300,
+    unitLabel: "round loaf",
+    image: "/images/menu/kibe-dabo.svg",
+    alt: "A glossy golden loaf brushed with spiced clarified butter.",
     allergens: ["wheat", "dairy"],
+  },
+  {
+    slug: "dabo-formaggio",
+    name: "Dabo Formaggio",
+    tagline: "Cheesy pull-apart bread",
+    description:
+      "A nod to Eritrea's Italian table — soft dabo baked with melting cheese until the top is golden and the middle pulls apart in ribbons.",
+    category: "breads",
+    priceCents: 1400,
+    unitLabel: "round loaf",
+    image: "/images/menu/dabo-formaggio.svg",
+    alt: "A golden cheese-topped pull-apart bread with melted cheese in the seams.",
+    allergens: ["wheat", "dairy"],
+  },
+  {
+    slug: "ayb-dabo",
+    name: "Ayb Dabo",
+    tagline: "Fresh-cheese bread",
+    description:
+      "Pillowy bread filled with ayb, the mild fresh cheese of the highlands — like a quiet, savory cousin to a cheese danish.",
+    category: "breads",
+    priceCents: 1300,
+    unitLabel: "round loaf",
+    image: "/images/menu/ayb-dabo.svg",
+    alt: "A soft bread roll split to reveal a fresh white cheese filling.",
+    allergens: ["wheat", "dairy"],
+  },
+  {
+    slug: "garlic-dabo",
+    name: "Garlic Dabo",
+    tagline: "Garlic & herb bread",
+    description:
+      "Soft dabo brushed with garlic and herbs and baked until the kitchen smells like a promise. Made for sharing alongside a bowl of pasta.",
+    category: "breads",
+    priceCents: 1200,
+    unitLabel: "round loaf",
+    image: "/images/menu/garlic-dabo.svg",
+    alt: "A golden garlic bread flecked with herbs and roasted garlic.",
+    badges: ["Vegan"],
+    allergens: ["wheat"],
+  },
+  {
+    slug: "olive-sundried-tomato-dabo",
+    name: "Olive & Sun-Dried Tomato Dabo",
+    tagline: "Dimpled, herbed, sun-soaked",
+    description:
+      "Our focaccia-style dabo, dimpled with olive oil and studded with olives and sweet sun-dried tomatoes. Eritrean–Italian to the core.",
+    category: "breads",
+    priceCents: 1400,
+    unitLabel: "flat loaf",
+    image: "/images/menu/olive-sundried-tomato-dabo.svg",
+    alt: "A dimpled focaccia-style flatbread topped with olives and sun-dried tomatoes.",
+    badges: ["Vegan"],
+    allergens: ["wheat"],
+  },
+  {
+    slug: "sweet-milk-bread",
+    name: "Sweet Milk Bread",
+    tagline: "Soft, pillowy, just-sweet",
+    description:
+      "A cloud-soft enriched milk bread that pulls apart in tender strands — the kind that disappears before it cools.",
+    category: "breads",
+    priceCents: 1000,
+    unitLabel: "loaf",
+    image: "/images/menu/sweet-milk-bread.svg",
+    alt: "A pale golden, pillowy milk bread loaf with a soft sheen.",
+    allergens: ["wheat", "dairy", "eggs"],
+  },
+  {
+    slug: "cinnamon-raisin",
+    name: "Cinnamon Raisin",
+    tagline: "Swirled & spiced",
+    description:
+      "A soft loaf swirled with cinnamon sugar and sweet raisins — wonderful toasted with a little butter and a slow morning.",
+    category: "breads",
+    priceCents: 1100,
+    unitLabel: "loaf",
+    image: "/images/menu/cinnamon-raisin.svg",
+    alt: "A sliced cinnamon-raisin loaf showing a dark cinnamon swirl and raisins.",
+    allergens: ["wheat"],
   },
   {
     slug: "kita",
@@ -109,19 +196,49 @@ export const menu: MenuItem[] = [
     badges: ["Vegan"],
     allergens: ["wheat"],
   },
+
+  // ---- Cakes -------------------------------------------------------------
   {
-    slug: "mushabek",
-    name: "Mushabek",
-    tagline: "Saffron syrup spirals",
+    slug: "tres-leches-mini",
+    name: "Tres Leches Mini Cakes",
+    tagline: "Soaked in three milks",
     description:
-      "Crisp golden spirals soaked in a light cardamom-saffron syrup. Festive, fragrant, and impossible to eat just one.",
-    category: "sweets",
-    priceCents: 1000,
-    unitLabel: "half dozen",
-    image: "/images/menu/mushabek.jpg",
-    alt: "Bright orange lattice-like mushabek spirals glistening with saffron syrup.",
-    allergens: ["wheat"],
+      "Airy sponge drenched in three milks and crowned with soft cream — light, cool, and just sweet enough. Four little cakes to a box.",
+    category: "cakes",
+    priceCents: 1200,
+    unitLabel: "4 minis",
+    image: "/images/menu/tres-leches-mini.svg",
+    alt: "Four small tres leches cakes topped with whipped cream and a dusting of cinnamon.",
+    allergens: ["wheat", "dairy", "eggs"],
   },
+  {
+    slug: "better-than-sex-mini",
+    name: "Better Than Sex Mini Cakes",
+    tagline: "Chocolate, caramel & toffee",
+    description:
+      "Dark chocolate cake soaked in caramel, layered with cream and a rubble of toffee. Unapologetically rich. Four to a box.",
+    category: "cakes",
+    priceCents: 1300,
+    unitLabel: "4 minis",
+    image: "/images/menu/better-than-sex-mini.svg",
+    alt: "Four small chocolate cakes topped with cream, caramel drizzle and toffee bits.",
+    allergens: ["wheat", "dairy", "eggs"],
+  },
+  {
+    slug: "banana-mini-cake",
+    name: "Banana Mini Cake",
+    tagline: "Brown-sugar banana",
+    description:
+      "Moist banana cake with a whisper of brown sugar and cinnamon — the comfort of banana bread, dressed for the table.",
+    category: "cakes",
+    priceCents: 900,
+    unitLabel: "single cake",
+    image: "/images/menu/banana-mini-cake.svg",
+    alt: "A small round banana cake with a golden crumb and a light glaze.",
+    allergens: ["wheat", "dairy", "eggs"],
+  },
+
+  // ---- Sweets ------------------------------------------------------------
   {
     slug: "buna-cookies",
     name: "Buna Cookies",
@@ -149,17 +266,105 @@ export const menu: MenuItem[] = [
     badges: ["Vegan"],
     allergens: ["wheat"],
   },
+
+  // ---- Drinks ------------------------------------------------------------
+  {
+    slug: "spiced-tea",
+    name: "Spiced Tea",
+    tagline: "Cinnamon, cardamom & clove",
+    description:
+      "A loose-leaf black tea blend warmed with cinnamon, cardamom and clove — the shai that ends a good meal. Brews about a dozen cups.",
+    category: "drinks",
+    priceCents: 1400,
+    unitLabel: "loose-leaf tin",
+    image: "/images/menu/spiced-tea.svg",
+    alt: "A tin of loose-leaf spiced tea beside cinnamon sticks, cardamom pods and cloves.",
+    badges: ["Vegan"],
+    allergens: [],
+  },
+  {
+    slug: "ethiopian-cold-brew",
+    name: "Ethiopian Cold Brew",
+    tagline: "Slow-steeped & bright",
+    description:
+      "Single-origin Ethiopian coffee, cold-brewed for a smooth, fruit-bright cup with no bitterness. Ready to pour over ice.",
+    category: "drinks",
+    priceCents: 700,
+    unitLabel: "16 oz bottle",
+    image: "/images/menu/ethiopian-cold-brew.svg",
+    alt: "A clear bottle of dark cold brew coffee beside ice and coffee beans.",
+    badges: ["Vegan"],
+    allergens: [],
+  },
   {
     slug: "buna",
     name: "Buna",
     tagline: "Ceremony-grade whole-bean coffee",
     description:
       "Single-origin Yirgacheffe, roasted in small batches for the brightness a proper coffee ceremony deserves. Whole bean, 12 oz.",
-    category: "pantry",
+    category: "drinks",
     priceCents: 1600,
     unitLabel: "12 oz bag",
     image: "/images/menu/buna.jpg",
     alt: "A kraft bag of whole roasted Yirgacheffe coffee beans spilling onto a wooden board.",
+    badges: ["Vegan"],
+    allergens: [],
+  },
+
+  // ---- Sauces & Spreads --------------------------------------------------
+  {
+    slug: "marinara",
+    name: "Marinara Sauce",
+    tagline: "Slow-simmered tomato",
+    description:
+      "A bright, slow-simmered tomato sauce with garlic, basil and good olive oil — a taste of Eritrea's Italian kitchen. Pairs with our garlic dabo.",
+    category: "pantry",
+    priceCents: 1200,
+    unitLabel: "16 oz jar",
+    image: "/images/menu/marinara.svg",
+    alt: "A jar of rich red marinara sauce beside fresh basil and tomatoes.",
+    badges: ["Vegan"],
+    allergens: [],
+  },
+  {
+    slug: "spiced-butter",
+    name: "Spiced Butter Spread",
+    tagline: "Niter kibbeh, jarred",
+    description:
+      "Our kibe — clarified butter slow-infused with garlic, ginger and warm spices. A spoonful turns bread, rice, or vegetables into a feast.",
+    category: "pantry",
+    priceCents: 1200,
+    unitLabel: "8 oz jar",
+    image: "/images/menu/spiced-butter.svg",
+    alt: "A small jar of golden spiced clarified butter with whole spices.",
+    allergens: ["dairy"],
+  },
+  {
+    slug: "olive-tapenade",
+    name: "Olive Tapenade Spread",
+    tagline: "Briny & bright",
+    description:
+      "A coarse spread of olives, capers and herbs in olive oil — wonderful on warm dabo or stirred through pasta.",
+    category: "pantry",
+    priceCents: 1100,
+    unitLabel: "8 oz jar",
+    image: "/images/menu/olive-tapenade.svg",
+    alt: "A jar of dark green-black olive tapenade with a spoon and crusty bread.",
+    badges: ["Vegan"],
+    allergens: [],
+  },
+  {
+    slug: "vinegar-spread",
+    name: "Vinegar Spread",
+    tagline: "Tangy & savory",
+    description:
+      "A bright, tangy spread to cut through the rich and round out the table — a little goes a long way on warm bread.",
+    category: "pantry",
+    priceCents: 900,
+    unitLabel: "8 oz jar",
+    image: "/images/menu/vinegar-spread.svg",
+    alt: "A small jar of glossy, tangy savory spread beside slices of bread.",
+    badges: ["Vegan"],
     allergens: [],
   },
 ];
@@ -175,7 +380,7 @@ export const subscriptions: MenuItem[] = [
     priceCents: 3200,
     unitLabel: "per week",
     image: "/images/menu/weekly-table.jpg",
-    alt: "A linen-lined box of assorted Ethiopian breads and a sweet, ready for the week.",
+    alt: "A linen-lined box of assorted Eritrean and Ethiopian breads and a sweet, ready for the week.",
     interval: { unit: "week", count: 1, label: "week" },
     badges: ["Most loved"],
   },
@@ -184,7 +389,7 @@ export const subscriptions: MenuItem[] = [
     name: "The Hearth",
     tagline: "Two weeks of warmth",
     description:
-      "Our every-other-week box for smaller households — two signature breads and a sweet, with the same neighbor-feeding promise.",
+      "Our every-other-week bread box for smaller households — two signature breads and a sweet, with the same neighbor-feeding promise.",
     category: "subscription",
     priceCents: 3600,
     unitLabel: "every 2 weeks",
@@ -205,6 +410,45 @@ export const subscriptions: MenuItem[] = [
     alt: "An abundant monthly box with a large feast loaf, breads, sweets, and a bag of coffee.",
     interval: { unit: "month", count: 1, label: "month" },
   },
+  {
+    slug: "cake-box",
+    name: "Cake Box",
+    tagline: "A monthly box of mini cakes",
+    description:
+      "A monthly assortment of our mini cakes — tres leches, banana, the unspeakably rich one — boxed for celebrating, or for a Tuesday.",
+    category: "subscription",
+    priceCents: 3400,
+    unitLabel: "per month",
+    image: "/images/menu/cake-box.svg",
+    alt: "A box of assorted mini cakes with cream and caramel toppings.",
+    interval: { unit: "month", count: 1, label: "month" },
+  },
+  {
+    slug: "drinks-box",
+    name: "Drinks Box",
+    tagline: "Tea & coffee, every month",
+    description:
+      "A monthly pairing of our spiced tea and Ethiopian coffee — loose-leaf, whole-bean, and cold brew rotating through the seasons.",
+    category: "subscription",
+    priceCents: 2800,
+    unitLabel: "per month",
+    image: "/images/menu/drinks-box.svg",
+    alt: "A box with a tin of loose-leaf tea, a bag of coffee beans, and a bottle of cold brew.",
+    interval: { unit: "month", count: 1, label: "month" },
+  },
+  {
+    slug: "pantry-box",
+    name: "Sauce & Spread Box",
+    tagline: "A monthly pantry box",
+    description:
+      "A monthly trio from our pantry — the marinara plus two rotating spreads — to keep your table generous between bakes.",
+    category: "subscription",
+    priceCents: 3000,
+    unitLabel: "per month",
+    image: "/images/menu/pantry-box.svg",
+    alt: "A box holding a jar of marinara and two jars of spreads.",
+    interval: { unit: "month", count: 1, label: "month" },
+  },
 ];
 
 export const allItems = [...menu, ...subscriptions];
@@ -221,7 +465,9 @@ export const formatPrice = (cents: number, currency = "USD"): string =>
 
 export const categoryLabels: Record<Category, string> = {
   breads: "Breads",
+  cakes: "Cakes",
   sweets: "Sweets",
-  pantry: "Pantry",
-  subscription: "Bread Boxes",
+  drinks: "Drinks",
+  pantry: "Sauces & Spreads",
+  subscription: "Boxes",
 };

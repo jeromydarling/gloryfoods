@@ -5,28 +5,29 @@ import SubscriptionCard from "@components/SubscriptionCard.astro";
 import { subscriptions } from "@data/menu";
 
 const steps = [
-  { icon: "table", title: "Choose your box", body: "Weekly, every two weeks, or a generous monthly table." },
-  { icon: "bread", title: "We bake it fresh", body: "A rotating selection, made the morning it goes out." },
+  { icon: "table", title: "Choose your box", body: "Bread weekly or monthly — plus cake, drink, and pantry boxes." },
+  { icon: "bread", title: "We make it fresh", body: "A rotating selection, made the morning it goes out." },
   { icon: "gift", title: "A neighbor eats too", body: "A portion of every box bakes bread for someone going without." },
 ];
 const faqs = [
   { q: "Can I pause or cancel?", a: "Anytime, from the link in your confirmation email — no calls, no guilt. Pause for a vacation, skip a week, or stop whenever life shifts." },
   { q: "Pickup or delivery?", a: "Both. Choose at checkout. Local delivery covers St. Paul and the nearer Minneapolis neighborhoods; pickup is always free at the bakery." },
-  { q: "What's in the box?", a: "It rotates with the season and what's baking best that week — always a mix of signature breads and a little something sweet." },
+  { q: "What's in the box?", a: "It depends on the box you choose — bread, mini cakes, tea and coffee, or pantry sauces and spreads — and it rotates with the season and what's best that week." },
   { q: "How does feeding a neighbor work?", a: "We partner with nearby community tables and pantries. Every billing cycle, a share of subscription revenue becomes fresh bread carried to families who need it." },
 ];
 ---
 <Base
-  title="Bread Boxes"
-  description="A fresh box of Ethiopian baking on your schedule — weekly, biweekly, or monthly. Pause anytime. A portion of every box feeds a neighbor."
+  title="Boxes"
+  description="Fresh Eritrean/Ethiopian boxes on your schedule — bread, cakes, drinks, and pantry. Pause anytime. A portion of every box feeds a neighbor."
 >
   <section class="page-hero">
     <div class="container">
-      <p class="eyebrow" data-reveal>Bread boxes</p>
+      <p class="eyebrow" data-reveal>Boxes</p>
       <h1 data-reveal data-reveal-delay="60">A standing place at the table.</h1>
       <p class="lede prose" data-reveal data-reveal-delay="120">
-        Good bread, arriving like clockwork — and an act of welcome baked into
-        every delivery. Choose the rhythm that fits your home.
+        Good things, arriving like clockwork — and an act of welcome baked into
+        every delivery. Bread, cakes, drinks, or pantry — choose the rhythm that
+        fits your home.
       </p>
     </div>
   </section>

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Vibes Cuisine and Bakery — Ethiopian baking from St. Paul, MN. Astro + Cloudflare Pages + D1 + Stripe.",
+  "description": "Vibes Cuisine and Bakery — Eritrean/Ethiopian baking from St. Paul, MN. Astro + Cloudflare Workers + D1 + Stripe.",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
