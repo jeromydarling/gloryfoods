@@ -8,13 +8,13 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "wrangler pages dev ./dist --d1=DB --kv=KV",
     "astro": "astro",
     "check": "astro check",
+    "preview": "wrangler dev",
     "db:local": "wrangler d1 execute glory-foods-db --local --file=./db/schema.sql && wrangler d1 execute glory-foods-db --local --file=./db/seed.sql",
     "db:migrate": "wrangler d1 execute glory-foods-db --remote --file=./db/schema.sql",
     "db:seed": "wrangler d1 execute glory-foods-db --remote --file=./db/seed.sql",
-    "deploy": "astro build && wrangler pages deploy ./dist"
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.2.5",
