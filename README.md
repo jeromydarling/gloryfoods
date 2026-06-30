@@ -57,11 +57,12 @@ server to provision or keep warm.
 ```
 .
 ├── astro.config.mjs          # static output + sitemap
-├── wrangler.toml             # Pages config; D1 + KV bindings; public vars
+├── wrangler.toml             # Worker config; assets, D1 + KV bindings, vars
+├── worker/index.ts           # Worker entry: routes /api/* + serves assets
 ├── db/
 │   ├── schema.sql            # D1 schema (idempotent)
 │   └── seed.sql              # catalog seed (authoritative pricing)
-├── functions/                # Cloudflare Pages Functions (the API)
+├── functions/                # API handlers (imported by worker/index.ts)
 │   ├── _lib/                 # shared, non-routed helpers
 │   │   ├── types.ts          # Env bindings + row types
 │   │   ├── http.ts           # json(), rate limiting, validation, uuid
