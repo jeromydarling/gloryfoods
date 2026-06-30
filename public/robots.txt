@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://glory-foods.pages.dev/sitemap-index.xml
+Sitemap: https://gloryfoods.jer-f84.workers.dev/sitemap-index.xml

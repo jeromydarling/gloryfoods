@@ -1,0 +1,43 @@
+name: Apply D1 migrations
+
+# Cloudflare's Git integration (Workers Builds) now builds + deploys the Worker
+# on every push. It does not touch D1, so this workflow keeps the database
+# schema + catalog in sync. Runs only when db/ changes (or on demand), using a
+# token scoped to D1.
+#
+# Required repo secrets: CLOUDFLARE_API_TOKEN (D1: Edit), CLOUDFLARE_ACCOUNT_ID.
+
+on:
+  push:
+    branches: [main]
+    paths: ["db/**"]
+  workflow_dispatch: {}
+
+concurrency:
+  group: d1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+
+      - name: Apply schema (idempotent)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: d1 execute glory-foods-db --remote --file=./db/schema.sql
+
+      - name: Seed catalog (INSERT OR REPLACE)
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: d1 execute glory-foods-db --remote --file=./db/seed.sql

@@ -7,7 +7,7 @@ import sitemap from "@astrojs/sitemap";
 // under /functions, running on the Workers runtime alongside these assets.
 // Update `site` once a real domain is connected.
 export default defineConfig({
-  site: "https://glory-foods.pages.dev",
+  site: "https://gloryfoods.jer-f84.workers.dev",
   output: "static",
   trailingSlash: "ignore",
   integrations: [sitemap()],

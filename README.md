@@ -14,9 +14,9 @@ from one loaf to millions of orders.
 
 ```
                  ┌──────────────────────────────────────────────┐
-   Visitor ──▶   │  Cloudflare Pages (global edge CDN)           │
-                 │   • Static Astro site (HTML/CSS/JS)           │
-                 │   • Pages Functions  →  /functions/api/*      │  ◀── Workers runtime
+   Visitor ──▶   │  Cloudflare Worker  (gloryfoods, global edge)  │
+                 │   • Static assets — built Astro site           │
+                 │   • Worker API  →  /api/*  (worker/index.ts)   │
                  └───────────────┬──────────────────────────────┘
                                  │
             ┌────────────────────┼─────────────────────┬──────────────────┐
@@ -34,9 +34,10 @@ from one loaf to millions of orders.
 - **Frontend** — [Astro](https://astro.build) static output. Marketing + catalog
   pages are prerendered to HTML and served from the CDN; client interactivity
   (basket, scroll-reveal motion, forms) ships as a single small bundle.
-- **API** — Cloudflare **Pages Functions** under [`functions/`](functions), running on
-  the Workers runtime. They talk to Stripe over REST (no SDK to bundle) and persist
-  to D1.
+- **API** — a single Cloudflare **Worker** ([`worker/index.ts`](worker/index.ts))
+  routes `/api/*` to the handlers in [`functions/api/`](functions/api) and serves
+  the static site for everything else. Talks to Stripe over REST (no SDK to
+  bundle) and persists to D1.
 - **Database** — Cloudflare **D1** (SQLite at the edge). The `products` table is the
   authoritative source of price; the checkout API never trusts client-supplied amounts.
 - **KV** — webhook idempotency, fixed-window rate limiting, newsletter de-duplication.
@@ -176,27 +177,34 @@ Prompts live in [`scripts/image-prompts.json`](scripts/image-prompts.json).
 
 ---
 
-## 8. Deployment (Cloudflare Pages)
+## 8. Deployment (Cloudflare Workers)
+
+Deployed as a **Worker with static assets** named `gloryfoods`
+(`https://gloryfoods.jer-f84.workers.dev`). Cloudflare's Git integration builds
+and deploys on every push to `main` (it runs the `[build]` command in
+`wrangler.toml`, then `wrangler deploy`). The `worker/index.ts` entry serves the
+`/api/*` routes and falls back to the built Astro site.
 
 Provisioned resources (already created in this account):
 
 - **D1** `glory-foods-db` — `d371beb3-0460-4d51-a5fa-462ae8637066`
 - **KV** `glory-foods-kv` — `7b635d3f26c84435a88b86758df00817`
 
-One-command deploy (requires `wrangler login` or `CLOUDFLARE_API_TOKEN`):
+Manual deploy (requires `wrangler login` or a `CLOUDFLARE_API_TOKEN` with
+**Workers Scripts: Edit**):
 
 ```bash
-npm run db:migrate && npm run db:seed     # push schema + catalog to remote D1
-npm run deploy                            # astro build && wrangler pages deploy ./dist
+npm run deploy            # wrangler deploy (runs the build first)
+npm run db:migrate && npm run db:seed   # sync schema + catalog to remote D1
 ```
 
 Then set the Stripe secrets (kept out of git on purpose) and the webhook:
 
 ```bash
-wrangler pages secret put STRIPE_SECRET_KEY
-wrangler pages secret put STRIPE_WEBHOOK_SECRET
+wrangler secret put STRIPE_SECRET_KEY
+wrangler secret put STRIPE_WEBHOOK_SECRET
 # Stripe dashboard → Webhooks → add endpoint:
-#   https://<your-domain>/api/webhook
+#   https://gloryfoods.jer-f84.workers.dev/api/webhook
 #   events: checkout.session.completed,
 #           customer.subscription.updated, customer.subscription.deleted
 ```

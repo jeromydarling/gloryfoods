@@ -17,7 +17,7 @@ last step.
 
 ```bash
 wrangler login                  # interactive, OR:
-export CLOUDFLARE_API_TOKEN=...  # token with Pages + D1 + Workers AI scopes
+export CLOUDFLARE_API_TOKEN=...  # token with Workers Scripts + D1 + Workers AI scopes
 ```
 
 ## 2. (Re)apply DB to remote D1 — safe to re-run
@@ -29,22 +29,24 @@ npm run db:seed       # db/seed.sql    (INSERT OR REPLACE by slug)
 
 ## 3. Deploy the site
 
+Deployed as the Worker **`gloryfoods`** (static assets + API). Cloudflare's Git
+integration auto-deploys on every push to `main`. To deploy by hand:
+
 ```bash
-npm run deploy        # astro build && wrangler pages deploy ./dist
+npm run deploy        # wrangler deploy (runs the build first via [build])
 ```
 
-First deploy creates the Pages project `glory-foods`; it will be live at
-`https://glory-foods.pages.dev`. Connect a custom domain later in the dashboard
-(Pages → Custom domains) and update `SITE_URL` in `wrangler.toml` + `site` in
-`astro.config.mjs`.
+Live at `https://gloryfoods.jer-f84.workers.dev`. Add a custom domain later in
+the dashboard (Workers & Pages → gloryfoods → Settings → Domains & Routes) and
+update `SITE_URL` in `wrangler.toml` + `site` in `astro.config.mjs`.
 
 ## 4. Stripe (the saved-for-last keys)
 
 Use the **correct Stripe account's** keys (test keys first to verify the flow).
 
 ```bash
-wrangler pages secret put STRIPE_SECRET_KEY        # sk_live_… (or sk_test_…)
-wrangler pages secret put STRIPE_WEBHOOK_SECRET    # whsec_… (from step 5)
+wrangler secret put STRIPE_SECRET_KEY        # sk_live_… (or sk_test_…)
+wrangler secret put STRIPE_WEBHOOK_SECRET    # whsec_… (from step 5)
 ```
 
 No Stripe products need to be pre-created — checkout builds `price_data` inline from
@@ -85,26 +87,23 @@ npm run deploy
 4. Submit the contact + newsletter forms; confirm rows in `contact_messages` /
    `newsletter_subscribers`.
 
-## Continuous deployment (GitHub Actions)
+## Continuous deployment
 
-`.github/workflows/deploy.yml` deploys on every push to `main` (and via "Run
-workflow"): it type-checks, builds, applies the idempotent D1 schema + seed, then
-runs `wrangler pages deploy`. `.github/workflows/ci.yml` builds + type-checks every PR.
+**The Worker deploys via Cloudflare's Git integration** (Workers Builds): on every
+push to `main`, Cloudflare runs the `[build]` command in `wrangler.toml`
+(`npm install && npm run build`) and then `wrangler deploy`. No GitHub secrets are
+needed for the deploy itself — Cloudflare uses its own connection.
 
-**One-time setup** — add two repository secrets (GitHub → Settings → Secrets and
-variables → Actions → New repository secret):
+GitHub Actions handle the rest:
+- `.github/workflows/ci.yml` — build + type-check on every PR/branch.
+- `.github/workflows/db.yml` — applies the idempotent D1 schema + seed when
+  `db/**` changes (or on demand). Needs repo secrets `CLOUDFLARE_API_TOKEN`
+  (**D1: Edit**) and `CLOUDFLARE_ACCOUNT_ID`.
+- `.github/workflows/generate-images.yml` — renders Flux photography and commits
+  it; Cloudflare's Git build then redeploys.
 
-| Secret                  | Value |
-|-------------------------|-------|
-| `CLOUDFLARE_ACCOUNT_ID` | Your account id (Cloudflare dashboard → Workers & Pages → right sidebar). |
-| `CLOUDFLARE_API_TOKEN`  | Create at dashboard → My Profile → API Tokens → Create Token. Permissions: **Account › Cloudflare Pages › Edit** and **Account › D1 › Edit**. |
-
-The runner needs these because CI runs on GitHub's machines, not your Cloudflare
-account — this is the only credential step, and it's set once. Stripe keys stay as
-Pages runtime secrets (above) and are untouched by deploys.
-
-After secrets are set, merge to `main` (or trigger the workflow) and the site ships to
-`https://glory-foods.pages.dev`.
+If you ever want GitHub Actions to own the Worker deploy too, give the token
+**Workers Scripts: Edit** and run `wrangler deploy` from a workflow.
 
 ## Rename the brand
 
