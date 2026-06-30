@@ -1,5 +1,6 @@
 {
   "_comment": "Prompts for Cloudflare Workers AI (Flux) photography. Each entry maps an output file to a prompt. Run scripts/generate-flux-images.mjs (in CI: the 'Generate Flux imagery' workflow). Kept deliberately simple and uncluttered per request.",
+  "_revision": "menu-overhaul-1",
   "_style": "simple, appetizing food photography, warm natural window light, shallow depth of field, rustic wooden board or parchment background, uncluttered single subject, no text, no watermark",
   "images": [
     { "file": "images/hero.jpg", "prompt": "An overhead spread of freshly baked Eritrean and Ethiopian breads on a warm wooden table — a golden cinnamon-raisin himbasha scored in a sunburst, a honey dabo, a cheesy pull-apart dabo, a couple of mini cakes and a bag of coffee beans; inviting but not cluttered" },
