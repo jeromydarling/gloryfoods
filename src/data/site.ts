@@ -12,9 +12,9 @@ export const site = {
   codename: "Glory Foods",
   legalName: "Vibes Cuisine and Bakery LLC",
   // ሰላም (selam) — "peace"; the everyday Amharic greeting and farewell.
-  tagline: "Ethiopian baking, the welcome of a shared table.",
+  tagline: "Eritrean/Ethiopian baking, the welcome of a shared table.",
   shortDescription:
-    "A Ethiopian bakery in St. Paul, baking the breads and sweets of home — and setting a place for everyone who comes to the table.",
+    "An Eritrean/Ethiopian bakery in St. Paul, baking the breads and sweets of home — and setting a place for everyone who comes to the table.",
   location: {
     neighborhood: "Hamline–Midway",
     city: "St. Paul",

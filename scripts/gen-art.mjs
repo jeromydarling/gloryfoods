@@ -33,7 +33,9 @@ const C = {
 
 const PALETTES = {
   breads: [C.gold, C.berbere],
+  cakes: [C.berbere, C.gold],
   sweets: [C.berbere, C.goldDeep],
+  drinks: [C.coffee, C.berbere],
   pantry: [C.coffee, C.gold],
   subscription: [C.green, C.gold],
   story: [C.green, C.berbere],
@@ -202,20 +204,90 @@ function steam(cx, cy) {
   </g>`;
 }
 
+function cake(cx, cy, r, color) {
+  const w = r * 1.7,
+    h = r * 1.25;
+  let g = `<rect x="${cx - w / 2}" y="${cy - h / 2}" width="${w}" height="${h}" rx="12" fill="${color}"/>`;
+  g += `<rect x="${cx - w / 2}" y="${cy - h / 2}" width="${w}" height="${h * 0.34}" rx="12" fill="${C.cream}" opacity="0.95"/>`;
+  g += `<rect x="${cx - w / 2}" y="${cy - h * 0.04}" width="${w}" height="6" fill="${C.cream}" opacity="0.5"/>`;
+  g += `<circle cx="${cx}" cy="${cy - h * 0.36}" r="8" fill="${C.berbere}"/>`;
+  return g;
+}
+
+function mug(cx, cy, r, color) {
+  const w = r * 1.35,
+    h = r * 1.2;
+  let g = `<rect x="${cx - w / 2}" y="${cy - h / 2}" width="${w}" height="${h}" rx="16" fill="${color}"/>`;
+  g += `<ellipse cx="${cx}" cy="${cy - h / 2}" rx="${w / 2}" ry="${w * 0.16}" fill="${C.coffee}" opacity="0.55"/>`;
+  g += `<path d="M ${cx + w / 2 - 4} ${cy - h * 0.18} q ${r * 0.55} 0 ${r * 0.55} ${r * 0.34} q 0 ${r * 0.34} ${-r * 0.55} ${r * 0.34}" fill="none" stroke="${color}" stroke-width="12"/>`;
+  g += steam(cx, cy - h / 2 - 8);
+  return g;
+}
+
+function coldBrew(cx, cy, r, color) {
+  const w = r * 1.05,
+    h = r * 1.8;
+  let g = `<rect x="${cx - w / 2}" y="${cy - h / 2}" width="${w}" height="${h}" rx="16" fill="${color}" opacity="0.92"/>`;
+  g += `<rect x="${cx - w / 2}" y="${cy - h / 2}" width="${w}" height="${h * 0.16}" rx="12" fill="${C.parchmentDeep}"/>`;
+  g += `<rect x="${cx - w * 0.3}" y="${cy - r * 0.1}" width="${r * 0.34}" height="${r * 0.34}" rx="5" fill="${C.cream}" opacity="0.28" transform="rotate(12 ${cx} ${cy})"/>`;
+  g += `<rect x="${cx + r * 0.02}" y="${cy + r * 0.2}" width="${r * 0.3}" height="${r * 0.3}" rx="5" fill="${C.cream}" opacity="0.22" transform="rotate(-8 ${cx} ${cy})"/>`;
+  return g;
+}
+
+function jar(cx, cy, r, color) {
+  const w = r * 1.5,
+    h = r * 1.55;
+  let g = `<rect x="${cx - w / 2}" y="${cy - h / 2 + r * 0.22}" width="${w}" height="${h - r * 0.22}" rx="16" fill="${color}"/>`;
+  g += `<rect x="${cx - w / 2}" y="${cy - h / 2}" width="${w}" height="${r * 0.38}" rx="9" fill="${C.coffee}" opacity="0.85"/>`;
+  g += `<rect x="${cx - w / 2 + 7}" y="${cy - h * 0.08}" width="${w - 14}" height="${h * 0.3}" rx="7" fill="${C.cream}" opacity="0.88"/>`;
+  return g;
+}
+
 const MOTIF = {
+  // breads
   himbasha: (cx, cy, r) => roundLoaf(cx, cy, r, C.gold, true),
   dabo: (cx, cy, r) => roundLoaf(cx, cy, r, C.goldDeep, false) + speckleOn(cx, cy, r),
   "difo-dabo": (cx, cy, r) => roundLoaf(cx, cy, r * 1.05, C.berbere, true),
-  injera: (cx, cy, r) => flatStack(cx, cy, r, C.parchmentDeep),
-  "ambasha-berbere": (cx, cy, r) => roundLoaf(cx, cy, r, C.berbere, true),
+  "awaze-dabo": (cx, cy, r) => roundLoaf(cx, cy, r, C.berbere, true),
+  "kibe-dabo": (cx, cy, r) => roundLoaf(cx, cy, r, C.gold, false),
+  "dabo-formaggio": (cx, cy, r) =>
+    roundLoaf(cx, cy, r, C.gold, false) +
+    `<circle cx="${cx - r * 0.3}" cy="${cy - r * 0.1}" r="9" fill="${C.cream}" opacity="0.8"/>
+     <circle cx="${cx + r * 0.25}" cy="${cy + r * 0.15}" r="11" fill="${C.cream}" opacity="0.8"/>
+     <circle cx="${cx + r * 0.05}" cy="${cy - r * 0.35}" r="8" fill="${C.cream}" opacity="0.75"/>`,
+  "ayb-dabo": (cx, cy, r) => roundLoaf(cx, cy, r, C.parchmentDeep, false),
+  "garlic-dabo": (cx, cy, r) => roundLoaf(cx, cy, r, C.gold, false),
+  "olive-sundried-tomato-dabo": (cx, cy, r) =>
+    roundLoaf(cx, cy, r, C.goldDeep, false) +
+    `<circle cx="${cx - r * 0.3}" cy="${cy}" r="7" fill="${C.green}"/>
+     <circle cx="${cx + r * 0.2}" cy="${cy - r * 0.2}" r="7" fill="${C.berbere}"/>
+     <circle cx="${cx + r * 0.3}" cy="${cy + r * 0.25}" r="6" fill="${C.green}"/>`,
+  "sweet-milk-bread": (cx, cy, r) => roundLoaf(cx, cy, r, C.gold, false),
+  "cinnamon-raisin": (cx, cy, r) => roundLoaf(cx, cy, r, C.goldDeep, false) + speckleOn(cx, cy, r),
   kita: (cx, cy, r) => flatStack(cx, cy, r * 0.95, C.gold),
-  mushabek: (cx, cy, r) => spiral(cx, cy, r, C.berbere),
+  // cakes
+  "tres-leches-mini": (cx, cy, r) => cake(cx, cy, r, C.gold),
+  "better-than-sex-mini": (cx, cy, r) => cake(cx, cy, r, C.coffee),
+  "banana-mini-cake": (cx, cy, r) => cake(cx, cy, r, C.goldDeep),
+  // sweets
   "buna-cookies": (cx, cy, r) => cookies(cx, cy, r, C.coffee),
   "dabo-kolo": (cx, cy, r) => nuggets(cx, cy, r, C.goldDeep),
+  // drinks
+  "spiced-tea": (cx, cy, r) => mug(cx, cy, r, C.berbere),
+  "ethiopian-cold-brew": (cx, cy, r) => coldBrew(cx, cy, r, C.coffee),
   buna: (cx, cy, r) => coffeeBag(cx, cy, r, C.coffee),
+  // sauces & spreads
+  marinara: (cx, cy, r) => jar(cx, cy, r, C.berbere),
+  "spiced-butter": (cx, cy, r) => jar(cx, cy, r, C.gold),
+  "olive-tapenade": (cx, cy, r) => jar(cx, cy, r, C.green),
+  "vinegar-spread": (cx, cy, r) => jar(cx, cy, r, C.goldDeep),
+  // boxes
   "weekly-table": (cx, cy, r) => breadBox(cx, cy, r, C.berbere),
   "biweekly-hearth": (cx, cy, r) => breadBox(cx, cy, r * 0.92, C.gold),
   "monthly-gursha": (cx, cy, r) => breadBox(cx, cy, r * 1.05, C.green),
+  "cake-box": (cx, cy, r) => breadBox(cx, cy, r, C.gold) + cake(cx, cy - r * 0.2, r * 0.45, C.berbere),
+  "drinks-box": (cx, cy, r) => breadBox(cx, cy, r, C.coffee),
+  "pantry-box": (cx, cy, r) => breadBox(cx, cy, r, C.green) + jar(cx, cy - r * 0.2, r * 0.4, C.berbere),
 };
 
 function speckleOn(cx, cy, r) {
@@ -232,19 +304,42 @@ function speckleOn(cx, cy, r) {
 /* ------------------------------ catalog --------------------------------- */
 
 const items = [
+  // breads
   { slug: "himbasha", cat: "breads", seed: 101 },
   { slug: "dabo", cat: "breads", seed: 102 },
   { slug: "difo-dabo", cat: "breads", seed: 103 },
-  { slug: "injera", cat: "breads", seed: 104 },
-  { slug: "ambasha-berbere", cat: "breads", seed: 105 },
-  { slug: "kita", cat: "breads", seed: 106 },
-  { slug: "mushabek", cat: "sweets", seed: 107 },
-  { slug: "buna-cookies", cat: "sweets", seed: 108 },
-  { slug: "dabo-kolo", cat: "sweets", seed: 109 },
-  { slug: "buna", cat: "pantry", seed: 110 },
-  { slug: "weekly-table", cat: "subscription", seed: 111 },
-  { slug: "biweekly-hearth", cat: "subscription", seed: 112 },
-  { slug: "monthly-gursha", cat: "subscription", seed: 113 },
+  { slug: "awaze-dabo", cat: "breads", seed: 104 },
+  { slug: "kibe-dabo", cat: "breads", seed: 105 },
+  { slug: "dabo-formaggio", cat: "breads", seed: 106 },
+  { slug: "ayb-dabo", cat: "breads", seed: 107 },
+  { slug: "garlic-dabo", cat: "breads", seed: 108 },
+  { slug: "olive-sundried-tomato-dabo", cat: "breads", seed: 109 },
+  { slug: "sweet-milk-bread", cat: "breads", seed: 110 },
+  { slug: "cinnamon-raisin", cat: "breads", seed: 111 },
+  { slug: "kita", cat: "breads", seed: 112 },
+  // cakes
+  { slug: "tres-leches-mini", cat: "cakes", seed: 120 },
+  { slug: "better-than-sex-mini", cat: "cakes", seed: 121 },
+  { slug: "banana-mini-cake", cat: "cakes", seed: 122 },
+  // sweets
+  { slug: "buna-cookies", cat: "sweets", seed: 130 },
+  { slug: "dabo-kolo", cat: "sweets", seed: 131 },
+  // drinks
+  { slug: "spiced-tea", cat: "drinks", seed: 140 },
+  { slug: "ethiopian-cold-brew", cat: "drinks", seed: 141 },
+  { slug: "buna", cat: "drinks", seed: 142 },
+  // sauces & spreads
+  { slug: "marinara", cat: "pantry", seed: 150 },
+  { slug: "spiced-butter", cat: "pantry", seed: 151 },
+  { slug: "olive-tapenade", cat: "pantry", seed: 152 },
+  { slug: "vinegar-spread", cat: "pantry", seed: 153 },
+  // boxes
+  { slug: "weekly-table", cat: "subscription", seed: 160 },
+  { slug: "biweekly-hearth", cat: "subscription", seed: 161 },
+  { slug: "monthly-gursha", cat: "subscription", seed: 162 },
+  { slug: "cake-box", cat: "subscription", seed: 163 },
+  { slug: "drinks-box", cat: "subscription", seed: 164 },
+  { slug: "pantry-box", cat: "subscription", seed: 165 },
 ];
 
 mkdirSync(join(OUT, "menu"), { recursive: true });
@@ -256,7 +351,8 @@ for (const it of items) {
   const cx = w / 2,
     cy = h / 2 - 18;
   const r = 120;
-  const motif = MOTIF[it.slug](cx, cy, r);
+  const draw = MOTIF[it.slug] ?? ((x, y, rr) => roundLoaf(x, y, rr, C.gold, true));
+  const motif = draw(cx, cy, r);
   const svg = frame(w, h, PALETTES[it.cat], it.seed, plate(cx, cy, r) + motif, "");
   writeFileSync(join(OUT, "menu", `${it.slug}.svg`), svg);
   count++;
@@ -273,9 +369,9 @@ for (const it of items) {
     roundLoaf(cx, cy - 40, 150, C.gold, true) +
     roundLoaf(cx - 180, cy + 150, 90, C.berbere, true) +
     roundLoaf(cx + 175, cy + 150, 95, C.goldDeep, false) +
-    flatStack(cx - 150, cy - 200, 80, C.parchmentDeep) +
+    cake(cx - 150, cy - 195, 78, C.gold) +
     coffeeBag(cx + 180, cy - 170, 70, C.coffee) +
-    spiral(cx + 30, cy + 260, 70, C.berbere) +
+    jar(cx + 24, cy + 260, 62, C.berbere) +
     steam(cx);
   writeFileSync(join(OUT, "hero.svg"), frame(w, h, PALETTES.hero, 200, inner, ""));
   count++;
@@ -284,7 +380,7 @@ for (const it of items) {
 // story chapters — abstract warm scenes
 const storyScenes = [
   (cx, cy) => roundLoaf(cx, cy, 110, C.gold, true) + steam(cx),
-  (cx, cy) => flatStack(cx, cy, 130, C.parchmentDeep) + roundLoaf(cx + 150, cy + 60, 70, C.berbere, true),
+  (cx, cy) => mug(cx, cy, 110, C.berbere) + roundLoaf(cx + 150, cy + 55, 62, C.gold, true),
   (cx, cy) => breadBox(cx, cy, 130, C.green),
 ];
 for (let i = 0; i < 3; i++) {
@@ -309,7 +405,7 @@ for (let i = 0; i < 3; i++) {
   const inner = `${plate(cx - 360, cy, 150)}${roundLoaf(cx - 360, cy, 150, C.gold, true)}
     <text x="${tx}" y="${cy - 58}" text-anchor="middle" font-family="Georgia, serif" font-size="62" fill="${C.coffee}">Vibes Cuisine</text>
     <text x="${tx}" y="${cy + 14}" text-anchor="middle" font-family="Georgia, serif" font-size="62" fill="${C.coffee}">and Bakery</text>
-    <text x="${tx}" y="${cy + 74}" text-anchor="middle" font-family="Georgia, serif" font-size="30" font-style="italic" fill="${C.berbere}">Ethiopian baking, the welcome of a shared table.</text>
+    <text x="${tx}" y="${cy + 74}" text-anchor="middle" font-family="Georgia, serif" font-size="30" font-style="italic" fill="${C.berbere}">Eritrean/Ethiopian baking, the welcome of a shared table.</text>
     <text x="${tx}" y="${cy + 122}" text-anchor="middle" font-family="Georgia, serif" font-size="25" fill="${C.green}">St. Paul, Minnesota</text>`;
   writeFileSync(join(OUT, "og-default.svg"), frame(w, h, PALETTES.hero, 400, inner, ""));
   count++;

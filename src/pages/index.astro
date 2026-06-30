@@ -7,7 +7,7 @@ import { site } from "@data/site";
 import { menu, subscriptions } from "@data/menu";
 import { values } from "@data/values";
 
-const featuredSlugs = ["himbasha", "injera", "mushabek"];
+const featuredSlugs = ["himbasha", "buna-cookies", "buna"];
 const featured = featuredSlugs
   .map((slug) => menu.find((m) => m.slug === slug))
   .filter((m): m is (typeof menu)[number] => Boolean(m));
@@ -45,7 +45,7 @@ const weekly = subscriptions.find((s) => s.slug === "weekly-table")!;
         <div class="hero__plate drift">
           <img
             src="/images/hero.jpg"
-            alt="A spread of freshly baked Ethiopian breads — himbasha, honeyed dabo, and rolled injera — on a warm wooden table."
+            alt="A spread of freshly baked Eritrean and Ethiopian breads — cinnamon-raisin himbasha, honeyed dabo, and a cheesy dabo formaggio — on a warm wooden table."
             width="720"
             height="820"
             fetchpriority="high"
@@ -53,7 +53,7 @@ const weekly = subscriptions.find((s) => s.slug === "weekly-table")!;
           />
         </div>
         <div class="hero__chip hero__chip--1">
-          <strong>ሰላም</strong><span>welcome</span>
+          <strong lang="am">{site.amharic.welcome}</strong><span>welcome</span>
         </div>
         <div class="hero__chip hero__chip--2">
           <Icon name="star" size={16} /><span>Baked this morning</span>
@@ -263,7 +263,8 @@ const weekly = subscriptions.find((s) => s.slug === "weekly-table")!;
   .hero__chip strong {
     font-family: var(--font-display);
     color: var(--berbere);
-    font-size: 1.2rem;
+    font-size: 1.05rem;
+    white-space: nowrap;
   }
   .hero__chip span {
     color: var(--ink-soft);

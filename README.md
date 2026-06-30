@@ -1,9 +1,9 @@
 # Glory Foods · Vibes Cuisine and Bakery
 
-> **Codename:** Glory Foods. **Working brand:** Vibes Cuisine and Bakery — Ethiopian baking from St. Paul, MN.
+> **Codename:** Glory Foods. **Working brand:** Vibes Cuisine and Bakery — Eritrean/Ethiopian baking from St. Paul, MN.
 > Rename everywhere by editing one file: [`src/data/site.ts`](src/data/site.ts).
 
-A production-ready storefront MVP for a neighborhood Ethiopian bakery: a beautiful,
+A production-ready storefront MVP for a neighborhood Eritrean/Ethiopian bakery: a beautiful,
 accessible, animated marketing site with online ordering (one-time **and**
 subscription "bread boxes"), built to run entirely on Cloudflare's edge and scale
 from one loaf to millions of orders.
@@ -131,7 +131,7 @@ HMAC-SHA256 webhook verification with replay protection, and idempotent writes.
 ## 5. UI architecture
 
 - **Design system** in [`src/styles/global.css`](src/styles/global.css): CSS custom
-  properties for a warm Ethiopian palette (teff cream, honey gold, berbere red,
+  properties for a warm Eritrean/Ethiopian palette (teff cream, honey gold, berbere red,
   highland green, coffee), a fluid type scale, and reusable primitives (`.btn`,
   `.card`, `.container`, `.section`).
 - **Components** are Astro `.astro` files with scoped styles — zero client framework.

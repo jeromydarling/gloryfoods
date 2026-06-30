@@ -54,7 +54,7 @@ export const story = {
     },
     {
       heading: "Recipes that crossed an ocean",
-      body: "Our himbasha, our honeyed dabo, the slow ferment of teff injera — these are not inventions. They are inheritances, carried from Addis and Gondar and Hawassa to Minnesota, and kept exactly as faithfully as we know how. To bake them is to keep a door open between here and home.",
+      body: "Our himbasha, our honeyed dabo, the cheese breads touched by Eritrea's Italian table — these are not inventions. They are inheritances, carried from Asmara and Addis, Gondar and Hawassa, to Minnesota, and kept exactly as faithfully as we know how. To bake them is to keep a door open between here and home.",
     },
     {
       heading: "A bakery that answers to its neighbors",

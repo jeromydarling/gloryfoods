@@ -1,23 +1,47 @@
 {
-  "_comment": "Prompts for Cloudflare Workers AI (Flux) photography. Each entry maps an output file to a prompt. Run scripts/generate-flux-images.mjs to render. Style is kept consistent: warm natural light, shallow depth of field, rustic St. Paul bakery, parchment + wood tones.",
-  "_style": "professional food photography, warm natural window light, shallow depth of field, rustic wooden table, soft parchment background, appetizing, editorial, no text, no watermark",
+  "_comment": "Prompts for Cloudflare Workers AI (Flux) photography. Each entry maps an output file to a prompt. Run scripts/generate-flux-images.mjs (in CI: the 'Generate Flux imagery' workflow). Kept deliberately simple and uncluttered per request.",
+  "_style": "simple, appetizing food photography, warm natural window light, shallow depth of field, rustic wooden board or parchment background, uncluttered single subject, no text, no watermark",
   "images": [
-    { "file": "images/hero.jpg", "prompt": "An abundant overhead spread of freshly baked Ethiopian breads on a warm wooden table — a golden cardamom himbasha scored in a sunburst, a honey-glazed dabo, a rolled stack of teff injera, a small bag of roasted coffee beans, scattered nigella seeds" },
-    { "file": "images/menu/himbasha.jpg", "prompt": "A single round golden himbasha celebration bread scored in a sunburst pattern, lightly dusted with seeds, on parchment" },
-    { "file": "images/menu/dabo.jpg", "prompt": "A rustic round honey-spiced Ethiopian dabo loaf with a deep amber crust flecked with nigella seeds, on a wooden board" },
-    { "file": "images/menu/difo-dabo.jpg", "prompt": "An oversized burnished Ethiopian difo dabo celebration loaf resting on a woven mesob basket" },
-    { "file": "images/menu/injera.jpg", "prompt": "A rolled stack of soft spongy teff injera flatbread showing its lacy fermented surface, on a plate" },
-    { "file": "images/menu/ambasha-berbere.jpg", "prompt": "A deep red-gold berbere ambasha bread torn open to reveal a soft spiced crumb, steam rising" },
-    { "file": "images/menu/kita.jpg", "prompt": "A stack of four thin freckled Ethiopian kita flatbreads on parchment paper" },
-    { "file": "images/menu/mushabek.jpg", "prompt": "Bright orange lattice-like mushabek sweet spirals glistening with saffron syrup on a small plate" },
-    { "file": "images/menu/buna-cookies.jpg", "prompt": "A plate of deep-brown coffee and cardamom shortbread cookies beside scattered roasted coffee beans" },
-    { "file": "images/menu/dabo-kolo.jpg", "prompt": "A scattered pile of small golden toasted dabo kolo crunch nuggets in a paper bag" },
+    { "file": "images/hero.jpg", "prompt": "An overhead spread of freshly baked Eritrean and Ethiopian breads on a warm wooden table — a golden cinnamon-raisin himbasha scored in a sunburst, a honey dabo, a cheesy pull-apart dabo, a couple of mini cakes and a bag of coffee beans; inviting but not cluttered" },
+
+    { "file": "images/menu/himbasha.jpg", "prompt": "A single round golden himbasha bread scored in a sunburst pattern, studded with raisins and dusted with cinnamon, on parchment" },
+    { "file": "images/menu/dabo.jpg", "prompt": "A rustic round honey-glazed dabo bread with a deep amber crust flecked with black seeds, on a wooden board" },
+    { "file": "images/menu/difo-dabo.jpg", "prompt": "A large burnished round Ethiopian difo dabo celebration loaf resting on a woven basket" },
+    { "file": "images/menu/awaze-dabo.jpg", "prompt": "A round red-gold bread brushed with awaze berbere paste, torn to show a soft warm-spiced crumb, on parchment" },
+    { "file": "images/menu/kibe-dabo.jpg", "prompt": "A glossy golden round bread brushed with spiced clarified butter, on a wooden board" },
+    { "file": "images/menu/dabo-formaggio.jpg", "prompt": "A round golden cheese pull-apart bread with melted cheese in the seams, on parchment" },
+    { "file": "images/menu/ayb-dabo.jpg", "prompt": "A soft white bread roll split open to show a fresh white cheese filling, on parchment" },
+    { "file": "images/menu/garlic-dabo.jpg", "prompt": "A round golden garlic bread brushed with herbs and roasted garlic, on a wooden board" },
+    { "file": "images/menu/olive-sundried-tomato-dabo.jpg", "prompt": "A dimpled focaccia-style flatbread topped with black olives and sun-dried tomatoes, drizzled with olive oil" },
+    { "file": "images/menu/sweet-milk-bread.jpg", "prompt": "A pale golden soft pull-apart milk bread loaf with a glossy top, on a wooden board" },
+    { "file": "images/menu/cinnamon-raisin.jpg", "prompt": "A sliced cinnamon-raisin loaf showing a dark cinnamon swirl and raisins, on parchment" },
+    { "file": "images/menu/kita.jpg", "prompt": "A small stack of thin freckled Ethiopian kita flatbreads on parchment" },
+
+    { "file": "images/menu/tres-leches-mini.jpg", "prompt": "A small tres leches cake topped with whipped cream and a dusting of cinnamon on a plate" },
+    { "file": "images/menu/better-than-sex-mini.jpg", "prompt": "A small chocolate cake topped with whipped cream, caramel drizzle and toffee bits on a plate" },
+    { "file": "images/menu/banana-mini-cake.jpg", "prompt": "A small round banana cake with a golden crumb and a light glaze on a plate" },
+
+    { "file": "images/menu/buna-cookies.jpg", "prompt": "A small plate of deep-brown coffee-cardamom shortbread cookies beside a few roasted coffee beans" },
+    { "file": "images/menu/dabo-kolo.jpg", "prompt": "A small pile of golden toasted dabo kolo crunch nuggets spilling from a paper bag" },
+
+    { "file": "images/menu/spiced-tea.jpg", "prompt": "A glass cup of amber spiced tea beside cinnamon sticks, cardamom pods and a few cloves, warm light" },
+    { "file": "images/menu/ethiopian-cold-brew.jpg", "prompt": "A clear glass bottle of dark cold brew coffee with ice and a few coffee beans" },
     { "file": "images/menu/buna.jpg", "prompt": "A kraft paper bag of whole roasted Yirgacheffe coffee beans spilling onto a wooden board" },
-    { "file": "images/menu/weekly-table.jpg", "prompt": "A linen-lined box filled with assorted Ethiopian breads and a sweet, ready for delivery" },
-    { "file": "images/menu/biweekly-hearth.jpg", "prompt": "A small linen-lined box holding two Ethiopian breads and a wrapped sweet on a warm cloth" },
-    { "file": "images/menu/monthly-gursha.jpg", "prompt": "An abundant monthly gift box with a large feast loaf, several breads, a sweet, and a bag of coffee" },
-    { "file": "images/story-1.jpg", "prompt": "A home kitchen scene with hands flouring dough on a wooden counter, morning light through a window" },
-    { "file": "images/story-2.jpg", "prompt": "Close-up of teff injera batter fermenting in a ceramic bowl beside cardamom pods and a small sack of teff flour" },
-    { "file": "images/story-3.jpg", "prompt": "A warm community table with shared Ethiopian bread being passed between hands, candid and inviting" }
+
+    { "file": "images/menu/marinara.jpg", "prompt": "A glass jar of bright red marinara sauce beside fresh basil and a tomato" },
+    { "file": "images/menu/spiced-butter.jpg", "prompt": "A small glass jar of golden spiced clarified butter (niter kibbeh) with a few whole spices" },
+    { "file": "images/menu/olive-tapenade.jpg", "prompt": "A small jar of dark green-black olive tapenade with a spoon and a slice of crusty bread" },
+    { "file": "images/menu/vinegar-spread.jpg", "prompt": "A small jar of glossy savory spread beside a slice of bread" },
+
+    { "file": "images/menu/weekly-table.jpg", "prompt": "A linen-lined box of assorted Eritrean and Ethiopian breads and a sweet, ready for delivery" },
+    { "file": "images/menu/biweekly-hearth.jpg", "prompt": "A small linen-lined box holding two breads and a wrapped sweet" },
+    { "file": "images/menu/monthly-gursha.jpg", "prompt": "An abundant monthly gift box with a large feast loaf, two breads, a sweet and a bag of coffee" },
+    { "file": "images/menu/cake-box.jpg", "prompt": "A box of assorted mini cakes with cream and caramel toppings" },
+    { "file": "images/menu/drinks-box.jpg", "prompt": "A box holding a tin of loose-leaf tea, a bag of coffee beans and a bottle of cold brew" },
+    { "file": "images/menu/pantry-box.jpg", "prompt": "A box holding a jar of red marinara and two small jars of spreads" },
+
+    { "file": "images/story-1.jpg", "prompt": "Hands flouring dough on a wooden counter in a home kitchen, soft morning light" },
+    { "file": "images/story-2.jpg", "prompt": "A cup of spiced tea beside cardamom pods and a small sack of teff flour, warm light" },
+    { "file": "images/story-3.jpg", "prompt": "A warm community table with shared bread being passed between hands, candid and inviting" }
   ]
 }
